@@ -1,16 +1,14 @@
 {
-  "name": "parcel-react-boilerplate",
+  "name": "ui-components",
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
   "author": "dastasoft",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel --no-cache public/index.html",
     "build": "parcel build src/index.html",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "bit": "./node_modules/bit-bin/bin/bit.js",
-    "bit-publish": "yarn bit export dastag.ui-components"
+    "build-storybook": "build-storybook"
   },
   "bit": {
     "env": {
@@ -21,16 +19,14 @@
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "styled-components": "^5.0.1"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-hook-form": "^4.10.1",
-    "react-select": "^3.0.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
@@ -44,7 +40,6 @@
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "bit-bin": "^14.7.6",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
