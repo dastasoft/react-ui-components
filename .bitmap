@@ -24,6 +24,29 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "dastag.ui-components/button@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/components/Button/Button.js",
+                "test": false,
+                "name": "Button.js"
+            },
+            {
+                "relativePath": "src/components/Button/ButtonBase.js",
+                "test": false,
+                "name": "ButtonBase.js"
+            },
+            {
+                "relativePath": "src/components/Button/index.js",
+                "test": false,
+                "name": "index.js"
+            }
+        ],
+        "mainFile": "src/components/Button/index.js",
+        "trackDir": "src/components/Button",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "dastag.ui-components/circle-progress-bar@0.0.3": {
         "files": [
             {
@@ -44,6 +67,29 @@
         ],
         "mainFile": "src/components/CircleProgressBar/index.js",
         "trackDir": "src/components/CircleProgressBar",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "dastag.ui-components/modal@0.0.2": {
+        "files": [
+            {
+                "relativePath": "src/components/Modal/Modal.js",
+                "test": false,
+                "name": "Modal.js"
+            },
+            {
+                "relativePath": "src/components/Modal/ModalBase.js",
+                "test": false,
+                "name": "ModalBase.js"
+            },
+            {
+                "relativePath": "src/components/Modal/index.js",
+                "test": false,
+                "name": "index.js"
+            }
+        ],
+        "mainFile": "src/components/Modal/index.js",
+        "trackDir": "src/components/Modal",
         "origin": "AUTHORED",
         "exported": true
     },
