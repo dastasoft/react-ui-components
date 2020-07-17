@@ -70,7 +70,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/modal@0.0.2": {
+    "dastag.ui-components/modal@0.0.8": {
         "files": [
             {
                 "relativePath": "src/components/Modal/Modal.js",
@@ -78,9 +78,9 @@
                 "name": "Modal.js"
             },
             {
-                "relativePath": "src/components/Modal/ModalBase.js",
+                "relativePath": "src/components/Modal/assets/Close.js",
                 "test": false,
-                "name": "ModalBase.js"
+                "name": "Close.js"
             },
             {
                 "relativePath": "src/components/Modal/index.js",
@@ -116,5 +116,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.6"
+    "version": "14.8.8"
 }
