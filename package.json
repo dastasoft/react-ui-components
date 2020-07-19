@@ -15,7 +15,8 @@
       "compiler": "bit.envs/compilers/react@1.0.14"
     },
     "componentsDefaultDirectory": "src/components/{name}",
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "defaultScope": "dastag.ui-components"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
@@ -49,6 +50,7 @@
     "eslint-plugin-react": "^7.18.3",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
+    "react-hook-form": "^6.0.7",
     "sass": "^1.26.2"
   }
 }

@@ -70,6 +70,49 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "dastag.ui-components/form@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/components/Form/Input/Input.js",
+                "test": false,
+                "name": "Input.js"
+            },
+            {
+                "relativePath": "src/components/Form/Input/index.js",
+                "test": false,
+                "name": "index.js"
+            },
+            {
+                "relativePath": "src/components/Form/Label/Label.js",
+                "test": false,
+                "name": "Label.js"
+            },
+            {
+                "relativePath": "src/components/Form/Label/index.js",
+                "test": false,
+                "name": "index.js"
+            },
+            {
+                "relativePath": "src/components/Form/ValidationMessage/ValidationMessage.js",
+                "test": false,
+                "name": "ValidationMessage.js"
+            },
+            {
+                "relativePath": "src/components/Form/ValidationMessage/index.js",
+                "test": false,
+                "name": "index.js"
+            },
+            {
+                "relativePath": "src/components/Form/index.js",
+                "test": false,
+                "name": "index.js"
+            }
+        ],
+        "mainFile": "src/components/Form/index.js",
+        "trackDir": "src/components/Form",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "dastag.ui-components/modal@0.0.8": {
         "files": [
             {
