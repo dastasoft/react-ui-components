@@ -70,8 +70,18 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/form@0.0.2": {
+    "dastag.ui-components/form@0.0.3": {
         "files": [
+            {
+                "relativePath": "src/components/Form/Checkbox/Checkbox.js",
+                "test": false,
+                "name": "Checkbox.js"
+            },
+            {
+                "relativePath": "src/components/Form/Checkbox/index.js",
+                "test": false,
+                "name": "index.js"
+            },
             {
                 "relativePath": "src/components/Form/Input/Input.js",
                 "test": false,
@@ -89,6 +99,16 @@
             },
             {
                 "relativePath": "src/components/Form/Label/index.js",
+                "test": false,
+                "name": "index.js"
+            },
+            {
+                "relativePath": "src/components/Form/Select/Select.js",
+                "test": false,
+                "name": "Select.js"
+            },
+            {
+                "relativePath": "src/components/Form/Select/index.js",
                 "test": false,
                 "name": "index.js"
             },

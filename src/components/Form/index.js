@@ -1,3 +1,5 @@
 import Input from './Input';
+import Checkbox from './Checkbox';
+import Select from './Select';
 
-export { Input };
+export { Input, Checkbox, Select };

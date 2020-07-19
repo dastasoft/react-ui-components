@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import CircleProgressBar from '../../components/CircleProgressBar';
-import { Input } from '../../components/Form';
+import { Input, Checkbox, Select } from '../../components/Form';
 import Button from '../../components/Button';
 
 const Playground = () => {
@@ -43,7 +43,39 @@ const Playground = () => {
                 }
               }}
             />
-            <Button text="Submit" />
+
+            <Checkbox
+              label="Agree"
+              name="agree"
+              rules={{
+                required: 'Required'
+              }}
+            />
+
+            <Checkbox
+              label="Agree2"
+              name="agree2"
+              rules={{
+                required: 'Required'
+              }}
+              disabled
+            />
+
+            <Select
+              label="Country"
+              name="country"
+              placeholder="Select a country..."
+              options={[
+                { value: 'SP', label: 'Spain' },
+                { value: 'JP', label: 'Japan' }
+              ]}
+              rules={{
+                required: 'Must select a value'
+              }}
+            />
+            <div style={{ width: '50%' }}>
+              <Button text="Submit" />
+            </div>
           </Form>
         </FormProvider>
       </Holder>
@@ -96,7 +128,7 @@ const ComponentTitle = styled.h2`
 `;
 
 const Form = styled.form`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem 2rem;
 `;

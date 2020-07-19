@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { bool, string, object, func } from 'prop-types';
@@ -8,6 +9,7 @@ import ValidationMessage from '../ValidationMessage';
 
 const Input = ({
   className,
+  inputClassName,
   name,
   label,
   inputType,
@@ -24,6 +26,7 @@ const Input = ({
     <Wrapper className={className}>
       <Label name={name} label={label} required={required} />
       <StyledInput
+        className={inputClassName}
         type={inputType}
         id={name}
         name={name}
@@ -40,6 +43,7 @@ const Input = ({
 
 Input.propTypes = {
   className: string,
+  inputClassName: string,
   name: string.isRequired,
   label: string,
   inputType: string,
@@ -51,6 +55,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   className: '',
+  inputClassName: '',
   label: '',
   inputType: 'text',
   placeholder: '',
@@ -64,6 +69,7 @@ export default Input;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const StyledInput = styled.input`
