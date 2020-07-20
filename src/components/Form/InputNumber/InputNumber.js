@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { bool, string, object, func, number, node } from 'prop-types';
@@ -13,7 +14,6 @@ const InputNumber = ({
   name,
   label,
   labelWOMarker,
-  inputType,
   placeholder,
   disabled,
   rules,
@@ -50,17 +50,16 @@ const InputNumber = ({
       <Container>
         <StyledInput
           className={inputClassName}
-          type={inputType}
+          type="number"
           id={name}
           name={name}
-          pattern="[0-9]*"
           placeholder={placeholder}
           disabled={disabled}
           ref={register(rules)}
           onChange={onChangeHandler}
           onBlur={onBlur}
           error={errorMessage}
-          defaultValue={defaultValue || 0}
+          defaultValue={defaultValue}
         />
         <Buttons>
           <Increment role="button" onClick={onIncrement}>
@@ -82,12 +81,12 @@ InputNumber.propTypes = {
   name: string.isRequired,
   label: string,
   labelWOMarker: bool,
-  inputType: string,
   placeholder: string,
   disabled: bool,
   rules: object,
   onChangeHandler: func,
   onBlur: func,
+  defaultValue: number,
   max: number,
   min: number,
   upIcon: node,
@@ -99,12 +98,12 @@ InputNumber.defaultProps = {
   inputClassName: '',
   label: '',
   labelWOMarker: false,
-  inputType: 'text',
   placeholder: '',
   disabled: false,
   rules: {},
   onChangeHandler: () => {},
   onBlur: () => {},
+  defaultValue: 0,
   max: 99,
   min: 0,
   upIcon: null,
@@ -153,6 +152,12 @@ const StyledInput = styled.input`
   padding: 0.5rem;
   border: none;
   flex-grow: 1;
+  -moz-appearance: textfield;
+
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   :focus {
     outline: none;
