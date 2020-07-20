@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
@@ -27,7 +28,8 @@ const InputNumber = ({
   actionsColor,
   actionsBgColor,
   borderColor,
-  borderErrorColor
+  borderErrorColor,
+  borderRadius
 }) => {
   const { register, errors, getValues, setValue } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
@@ -43,6 +45,19 @@ const InputNumber = ({
     if (currentValue > min) setValue(name, parseInt(currentValue, 10) - 1);
   };
 
+  const commonProps = {
+    error: errorMessage,
+    borderColor,
+    borderErrorColor,
+    borderRadius
+  };
+
+  const actionCommonProps = {
+    ...commonProps,
+    role: 'button',
+    actionsBgColor
+  };
+
   return (
     <Wrapper className={className}>
       <Label
@@ -51,11 +66,7 @@ const InputNumber = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <Container
-        error={errorMessage}
-        borderColor={borderColor}
-        borderErrorColor={borderErrorColor}
-      >
+      <Container {...commonProps}>
         <StyledInput
           className={inputClassName}
           type="number"
@@ -67,26 +78,13 @@ const InputNumber = ({
           onChange={onChangeHandler}
           onBlur={onBlur}
           defaultValue={defaultValue}
+          borderRadius={borderRadius}
         />
         <Buttons>
-          <Increment
-            role="button"
-            onClick={onIncrement}
-            actionsBgColor={actionsBgColor}
-            error={errorMessage}
-            borderColor={borderColor}
-            borderErrorColor={borderErrorColor}
-          >
+          <Increment onClick={onIncrement} {...actionCommonProps}>
             {upIcon || <Caret up fill={actionsColor} />}
           </Increment>
-          <Decrement
-            role="button"
-            onClick={onDecrement}
-            actionsBgColor={actionsBgColor}
-            error={errorMessage}
-            borderColor={borderColor}
-            borderErrorColor={borderErrorColor}
-          >
+          <Decrement onClick={onDecrement} {...actionCommonProps}>
             {downIcon || <Caret down fill={actionsColor} />}
           </Decrement>
         </Buttons>
@@ -115,7 +113,8 @@ InputNumber.propTypes = {
   actionsColor: string,
   actionsBgColor: string,
   borderColor: string,
-  borderErrorColor: string
+  borderErrorColor: string,
+  borderRadius: string
 };
 
 InputNumber.defaultProps = {
@@ -136,7 +135,8 @@ InputNumber.defaultProps = {
   actionsColor: '#000000',
   actionsBgColor: '#ffffff',
   borderColor: '#000000',
-  borderErrorColor: 'red'
+  borderErrorColor: 'red',
+  borderRadius: '0'
 };
 
 export default InputNumber;
@@ -152,47 +152,15 @@ const Container = styled.div`
   border: 1px solid
     ${({ error, borderColor, borderErrorColor }) =>
       error ? borderErrorColor : borderColor};
+  border-radius: ${({ borderRadius }) => borderRadius};
   width: inherit;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 1rem;
-`;
-
-const Action = styled.div`
-  display: flex;
-  cursor: pointer;
-  background-color: ${({ actionsBgColor }) => actionsBgColor};
-
-  svg {
-    width: 50%;
-    margin: 0 auto;
-  }
-`;
-
-const Increment = styled(Action)`
-  border-left: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
-  border-bottom: 0.5px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
-`;
-
-const Decrement = styled(Action)`
-  border-top: 0.5px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
-  border-left: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
 `;
 
 const StyledInput = styled.input`
   padding: 0.5rem;
   border: none;
+  border-radius: ${({ borderRadius }) => borderRadius} 0 0
+    ${({ borderRadius }) => borderRadius};
   width: calc(100% - 1rem);
   -moz-appearance: textfield;
 
@@ -204,4 +172,44 @@ const StyledInput = styled.input`
   :focus {
     outline: none;
   }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 1rem;
+`;
+
+const Action = styled.div`
+  cursor: pointer;
+  background-color: ${({ actionsBgColor }) => actionsBgColor};
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 100%;
+  }
+`;
+
+const Increment = styled(Action)`
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
+  border-radius: 0 ${({ borderRadius }) => borderRadius} 0 0;
+`;
+
+const Decrement = styled(Action)`
+  border-top: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
+  border-radius: 0 0 ${({ borderRadius }) => borderRadius} 0;
 `;

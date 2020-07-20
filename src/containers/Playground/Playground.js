@@ -13,7 +13,7 @@ const Playground = () => {
 
   return (
     <Wrapper>
-      <ComponentTitle>Input</ComponentTitle>
+      <ComponentTitle>Form</ComponentTitle>
       <Holder>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -53,6 +53,20 @@ const Playground = () => {
                   message: 'must be greather than 1'
                 }
               }}
+            />
+
+            <InputNumber
+              label=""
+              name="month"
+              rules={{
+                required: 'Required',
+                min: {
+                  value: 1,
+                  message: 'must be greather than 1'
+                }
+              }}
+              borderColor="blue"
+              borderRadius="4px"
             />
 
             <Checkbox label="Agree" name="agree" />
