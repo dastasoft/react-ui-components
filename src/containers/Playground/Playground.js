@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import CircleProgressBar from '../../components/CircleProgressBar';
-import { Input, Checkbox, Select } from '../../components/Form';
+import { Input, InputNumber, Checkbox, Select } from '../../components/Form';
 import Button from '../../components/Button';
 
 const Playground = () => {
@@ -30,7 +30,6 @@ const Playground = () => {
               rules={{
                 required: 'Required'
               }}
-              withoutLabel
             />
             <Input
               label="Email"
@@ -44,6 +43,14 @@ const Playground = () => {
               }}
             />
 
+            <InputNumber
+              label=""
+              name="day"
+              rules={{
+                required: 'Required'
+              }}
+            />
+
             <Checkbox
               label="Agree"
               name="agree"
@@ -53,12 +60,12 @@ const Playground = () => {
             />
 
             <Checkbox
-              label="Agree2"
-              name="agree2"
+              label="Test sadsd wqewqe asdosado we"
+              name="agree3"
               rules={{
                 required: 'Required'
               }}
-              disabled
+              isCustom
             />
 
             <Select

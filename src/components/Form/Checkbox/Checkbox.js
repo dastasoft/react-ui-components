@@ -12,9 +12,11 @@ const Checkbox = ({
   checkboxClassName,
   name,
   label,
+  labelWOMarker,
   disabled,
   rules,
-  onChangeHandler
+  onChangeHandler,
+  isCustom
 }) => {
   const { register, errors, setValue, getValues } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
@@ -24,21 +26,49 @@ const Checkbox = ({
     setValue(name, !getValues(name));
   };
 
+  const theLabel = (
+    <Label
+      name={name}
+      label={label}
+      required={required}
+      withoutMarker={labelWOMarker}
+    />
+  );
+
   return (
     <Wrapper className={className}>
-      <Label name={name} label={label} required={required} />
-      <Container onClick={onClickHandler} disabled={disabled}>
-        <StyledCheckbox
-          className={checkboxClassName}
-          type="checkbox"
-          name={name}
-          disabled={disabled}
-          ref={register(rules)}
-          onChange={onChangeHandler}
-        />
-        <Checkmark error={errorMessage} />
-      </Container>
-      <ValidationMessage message={errorMessage} />
+      {isCustom ? (
+        <>
+          <Container onClick={onClickHandler} disabled={disabled}>
+            <StyledCheckbox
+              className={checkboxClassName}
+              type="checkbox"
+              name={name}
+              disabled={disabled}
+              ref={register(rules)}
+              onChange={onChangeHandler}
+            />
+            <Checkmark error={errorMessage} />
+            {theLabel}
+          </Container>
+        </>
+      ) : (
+        <>
+          {theLabel}
+          <Container onClick={onClickHandler} disabled={disabled}>
+            <StyledCheckbox
+              className={checkboxClassName}
+              type="checkbox"
+              name={name}
+              disabled={disabled}
+              ref={register(rules)}
+              onChange={onChangeHandler}
+            />
+            <Checkmark error={errorMessage} />
+          </Container>
+          <ValidationMessage message={errorMessage} />
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -48,18 +78,22 @@ Checkbox.propTypes = {
   checkboxClassName: string,
   name: string.isRequired,
   label: string,
+  labelWOMarker: bool,
   disabled: bool,
   rules: object,
-  onChangeHandler: func
+  onChangeHandler: func,
+  isCustom: bool
 };
 
 Checkbox.defaultProps = {
   className: '',
   checkboxClassName: '',
   label: '',
+  labelWOMarker: false,
   disabled: false,
   rules: {},
-  onChangeHandler: () => {}
+  onChangeHandler: () => {},
+  isCustom: false
 };
 
 export default Checkbox;
@@ -89,6 +123,9 @@ const StyledCheckbox = styled.input`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   height: 1.56rem;
   width: 1.56rem;
+  top: 10px;
+  left: 0;
+  position: absolute;
 
   :checked ~ span {
     background-color: #2196f3;

@@ -12,11 +12,13 @@ const Input = ({
   inputClassName,
   name,
   label,
+  labelWOMarker,
   inputType,
   placeholder,
   disabled,
   rules,
-  onChangeHandler
+  onChangeHandler,
+  onBlur
 }) => {
   const { register, errors } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
@@ -24,7 +26,12 @@ const Input = ({
 
   return (
     <Wrapper className={className}>
-      <Label name={name} label={label} required={required} />
+      <Label
+        name={name}
+        label={label}
+        required={required}
+        withoutMarker={labelWOMarker}
+      />
       <StyledInput
         className={inputClassName}
         type={inputType}
@@ -34,6 +41,7 @@ const Input = ({
         disabled={disabled}
         ref={register(rules)}
         onChange={onChangeHandler}
+        onBlur={onBlur}
         error={errorMessage}
       />
       <ValidationMessage message={errorMessage} />
@@ -46,22 +54,26 @@ Input.propTypes = {
   inputClassName: string,
   name: string.isRequired,
   label: string,
+  labelWOMarker: bool,
   inputType: string,
   placeholder: string,
   disabled: bool,
   rules: object,
-  onChangeHandler: func
+  onChangeHandler: func,
+  onBlur: func
 };
 
 Input.defaultProps = {
   className: '',
   inputClassName: '',
   label: '',
+  labelWOMarker: false,
   inputType: 'text',
   placeholder: '',
   disabled: false,
   rules: {},
-  onChangeHandler: () => {}
+  onChangeHandler: () => {},
+  onBlur: () => {}
 };
 
 export default Input;

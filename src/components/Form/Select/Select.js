@@ -13,6 +13,7 @@ const Select = ({
   selectClassName,
   name,
   label,
+  labelWOMarker,
   placeholder,
   disabled,
   rules,
@@ -45,7 +46,12 @@ const Select = ({
 
   return (
     <Wrapper className={className}>
-      <Label name={name} label={label} required={required} />
+      <Label
+        name={name}
+        label={label}
+        required={required}
+        withoutMarker={labelWOMarker}
+      />
       <Controller
         control={control}
         as={ReactSelect}
@@ -72,6 +78,7 @@ Select.propTypes = {
   selectClassName: string,
   name: string.isRequired,
   label: string,
+  labelWOMarker: bool,
   placeholder: string,
   disabled: bool,
   rules: object,
@@ -86,6 +93,7 @@ Select.defaultProps = {
   className: '',
   selectClassName: '',
   label: '',
+  labelWOMarker: false,
   placeholder: '',
   disabled: false,
   rules: {},

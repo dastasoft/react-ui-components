@@ -1,13 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { bool, string } from 'prop-types';
 
-const Label = ({ className, name, label, required }) => {
+const Label = ({ className, name, label, required, withoutMarker }) => {
   return (
     <Wrapper className={className} htmlFor={name}>
       {label}
-      {label && required && '*'}
+      {!withoutMarker && label && required && '*'}
     </Wrapper>
   );
+};
+
+Label.propTypes = {
+  className: string,
+  name: string,
+  label: string,
+  required: bool,
+  withoutMarker: bool
+};
+
+Label.defaultProps = {
+  className: '',
+  name: '',
+  label: '',
+  required: false,
+  withoutMarker: false
 };
 
 export default Label;
