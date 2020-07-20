@@ -47,24 +47,19 @@ const Playground = () => {
               label=""
               name="day"
               rules={{
-                required: 'Required'
+                required: 'Required',
+                min: {
+                  value: 1,
+                  message: 'must be greather than 1'
+                }
               }}
             />
 
-            <Checkbox
-              label="Agree"
-              name="agree"
-              rules={{
-                required: 'Required'
-              }}
-            />
+            <Checkbox label="Agree" name="agree" />
 
             <Checkbox
               label="Test sadsd wqewqe asdosado we"
               name="agree3"
-              rules={{
-                required: 'Required'
-              }}
               isCustom
             />
 

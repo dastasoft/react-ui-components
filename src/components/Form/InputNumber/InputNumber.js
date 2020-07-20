@@ -23,7 +23,11 @@ const InputNumber = ({
   min,
   defaultValue,
   upIcon,
-  downIcon
+  downIcon,
+  actionsColor,
+  actionsBgColor,
+  borderColor,
+  borderErrorColor
 }) => {
   const { register, errors, getValues, setValue } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
@@ -47,7 +51,11 @@ const InputNumber = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <Container>
+      <Container
+        error={errorMessage}
+        borderColor={borderColor}
+        borderErrorColor={borderErrorColor}
+      >
         <StyledInput
           className={inputClassName}
           type="number"
@@ -58,15 +66,28 @@ const InputNumber = ({
           ref={register(rules)}
           onChange={onChangeHandler}
           onBlur={onBlur}
-          error={errorMessage}
           defaultValue={defaultValue}
         />
         <Buttons>
-          <Increment role="button" onClick={onIncrement}>
-            {upIcon || <Caret up />}
+          <Increment
+            role="button"
+            onClick={onIncrement}
+            actionsBgColor={actionsBgColor}
+            error={errorMessage}
+            borderColor={borderColor}
+            borderErrorColor={borderErrorColor}
+          >
+            {upIcon || <Caret up fill={actionsColor} />}
           </Increment>
-          <Decrement role="button" onClick={onDecrement}>
-            {downIcon || <Caret down />}
+          <Decrement
+            role="button"
+            onClick={onDecrement}
+            actionsBgColor={actionsBgColor}
+            error={errorMessage}
+            borderColor={borderColor}
+            borderErrorColor={borderErrorColor}
+          >
+            {downIcon || <Caret down fill={actionsColor} />}
           </Decrement>
         </Buttons>
       </Container>
@@ -90,7 +111,11 @@ InputNumber.propTypes = {
   max: number,
   min: number,
   upIcon: node,
-  downIcon: node
+  downIcon: node,
+  actionsColor: string,
+  actionsBgColor: string,
+  borderColor: string,
+  borderErrorColor: string
 };
 
 InputNumber.defaultProps = {
@@ -107,7 +132,11 @@ InputNumber.defaultProps = {
   max: 99,
   min: 0,
   upIcon: null,
-  downIcon: null
+  downIcon: null,
+  actionsColor: '#000000',
+  actionsBgColor: '#ffffff',
+  borderColor: '#000000',
+  borderErrorColor: 'red'
 };
 
 export default InputNumber;
@@ -120,7 +149,9 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
-  border: 1px solid ${({ error }) => (error ? 'red' : 'black')};
+  border: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
 `;
 
 const Buttons = styled.div`
@@ -132,6 +163,8 @@ const Action = styled.div`
   display: flex;
   cursor: pointer;
   width: 1rem;
+  background-color: ${({ actionsBgColor }) => actionsBgColor};
+
   svg {
     width: 50%;
     margin: 0 auto;
@@ -139,13 +172,21 @@ const Action = styled.div`
 `;
 
 const Increment = styled(Action)`
-  border-left: 1px solid black;
-  border-bottom: 0.5px solid black;
+  border-left: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
+  border-bottom: 0.5px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
 `;
 
 const Decrement = styled(Action)`
-  border-top: 0.5px solid black;
-  border-left: 1px solid black;
+  border-top: 0.5px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
+  border-left: 1px solid
+    ${({ error, borderColor, borderErrorColor }) =>
+      error ? borderErrorColor : borderColor};
 `;
 
 const StyledInput = styled.input`

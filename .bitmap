@@ -47,7 +47,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/caret@0.0.1": {
+    "dastag.ui-components/caret@0.0.2": {
         "files": [
             {
                 "relativePath": "src/components/Caret/Caret.js",
@@ -88,7 +88,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/form@0.0.5": {
+    "dastag.ui-components/form@0.0.6": {
         "files": [
             {
                 "relativePath": "src/components/Form/Checkbox/Checkbox.js",
