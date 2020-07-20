@@ -152,17 +152,18 @@ const Container = styled.div`
   border: 1px solid
     ${({ error, borderColor, borderErrorColor }) =>
       error ? borderErrorColor : borderColor};
+  width: inherit;
 `;
 
 const Buttons = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1rem;
 `;
 
 const Action = styled.div`
   display: flex;
   cursor: pointer;
-  width: 1rem;
   background-color: ${({ actionsBgColor }) => actionsBgColor};
 
   svg {
@@ -192,7 +193,7 @@ const Decrement = styled(Action)`
 const StyledInput = styled.input`
   padding: 0.5rem;
   border: none;
-  flex-grow: 1;
+  width: calc(100% - 1rem);
   -moz-appearance: textfield;
 
   ::-webkit-inner-spin-button {

@@ -87,6 +87,7 @@ const Wrapper = styled.div`
 const StyledInput = styled.input`
   padding: 0.5rem;
   border: 1px solid ${({ error }) => (error ? 'red' : 'black')};
+  width: inherit;
 
   :focus {
     outline: none;
