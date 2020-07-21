@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
-import { bool, string, array, object, func } from 'prop-types';
+import { bool, string, array, object, node } from 'prop-types';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
@@ -16,13 +19,13 @@ const Select = ({
   label,
   labelWOMarker,
   placeholder,
-  defaulValue,
+  defaultValue,
   disabled,
   rules,
   options,
-  defaultValue,
   customStyles,
   customDropdownIcon,
+  customDropdownColor,
   customTheme
 }) => {
   const { errors, control } = useFormContext();
@@ -52,7 +55,10 @@ const Select = ({
       <components.DropdownIndicator {...props}>
         {customDropdownIcon || (
           <StyledCaret>
-            <Caret down={!menuIsOpen} />
+            <Caret
+              down={!menuIsOpen}
+              fill={menuIsOpen ? customDropdownColor : 'black'}
+            />
           </StyledCaret>
         )}
       </components.DropdownIndicator>
@@ -67,7 +73,7 @@ const Select = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <div onClick={() => setMenuIsOpen(!menuIsOpen)}>
+      <div role="button" onClick={() => setMenuIsOpen(!menuIsOpen)}>
         <Controller
           control={control}
           render={props => (
@@ -79,14 +85,14 @@ const Select = ({
               isDisabled={disabled}
               onChange={props.onChange}
               components={{ DropdownIndicator, IndicatorSeparator: null }}
+              styles={{ ...styles, ...customStyles }}
+              theme={customTheme}
+              defaulValue={defaultValue || { value: '', label: '' }}
             />
           )}
           id={name}
           name={name}
           rules={rules}
-          styles={{ ...styles, ...customStyles }}
-          defaulValue={defaulValue || { value: '', label: '' }}
-          theme={theme => ({ ...theme, ...customTheme })}
         />
       </div>
       <ValidationMessage message={errorMessage} />
@@ -103,11 +109,12 @@ Select.propTypes = {
   placeholder: string,
   disabled: bool,
   rules: object,
-  onChangeHandler: func,
   options: array,
   defaultValue: object,
   customStyles: object,
-  customTheme: object
+  customTheme: object,
+  customDropdownIcon: node,
+  customDropdownColor: string
 };
 
 Select.defaultProps = {
@@ -118,11 +125,12 @@ Select.defaultProps = {
   placeholder: '',
   disabled: false,
   rules: {},
-  onChangeHandler: () => {},
   options: [],
   defaultValue: {},
   customStyles: {},
-  customTheme: {}
+  customTheme: {},
+  customDropdownIcon: null,
+  customDropdownColor: 'black'
 };
 
 export default Select;

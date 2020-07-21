@@ -17,32 +17,6 @@ const Playground = () => {
       <Holder>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            {/* <Input
-              label="Name"
-              name="name"
-              rules={{
-                required: 'Required'
-              }}
-            />
-            <Input
-              label=""
-              name="surname"
-              rules={{
-                required: 'Required'
-              }}
-            />
-            <Input
-              label="Email"
-              name="email"
-              rules={{
-                required: 'Required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'invalid email address'
-                }
-              }}
-            /> */}
-
             <InputNumber label="" name="day" />
 
             <InputNumber
@@ -59,13 +33,6 @@ const Playground = () => {
               borderColor="royalBlue"
               checkColor="papayawhip"
             />
-
-            {/* <Checkbox
-              label="Test sadsd wqewqe asdosado we"
-              name="agree3"
-              isCustom
-              size="1rem"
-            /> */}
 
             <Select
               label="Country"
