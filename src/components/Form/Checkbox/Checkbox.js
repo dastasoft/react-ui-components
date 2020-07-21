@@ -17,6 +17,7 @@ const Checkbox = ({
   rules,
   onChangeHandler,
   borderColor,
+  borderRadius,
   bgColor,
   checkColor,
   isCustom,
@@ -78,6 +79,7 @@ const Checkbox = ({
               fill={checkColor}
               bgColor={bgColor}
               borderColor={borderColor}
+              borderRadius={borderRadius}
               size={size}
             />
             {theLabel}
@@ -101,6 +103,7 @@ const Checkbox = ({
               fill={checkColor}
               bgColor={bgColor}
               borderColor={borderColor}
+              borderRadius={borderRadius}
               size={size}
             />
           </Container>
@@ -121,6 +124,7 @@ Checkbox.propTypes = {
   rules: object,
   onChangeHandler: func,
   borderColor: string,
+  borderRadius: string,
   bgColor: string,
   checkColor: string,
   isCustom: bool,
@@ -136,6 +140,7 @@ Checkbox.defaultProps = {
   rules: {},
   onChangeHandler: () => {},
   borderColor: '#000000',
+  borderRadius: '0px',
   bgColor: '#000000',
   checkColor: '#ffffff',
   isCustom: false,
@@ -194,5 +199,6 @@ const SVG = styled.svg`
   background-color: ${({ bgColor, checked }) =>
     checked ? bgColor : 'transparent'};
   border: 1px solid ${({ error, borderColor }) => (error ? 'red' : borderColor)};
+  border-radius: ${({ borderRadius }) => borderRadius};
   padding: 2px;
 `;
