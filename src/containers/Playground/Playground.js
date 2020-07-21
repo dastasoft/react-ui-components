@@ -20,29 +20,28 @@ const Playground = () => {
             <InputNumber label="" name="day" />
 
             <InputNumber
-              label=""
-              name="month"
               borderColor="blue"
               borderRadius="4px"
+              label=""
+              name="month"
             />
 
             <Checkbox
-              label="Agree"
-              name="agree"
               bgColor="royalBlue"
               borderColor="royalBlue"
               checkColor="papayawhip"
+              label="Agree"
+              name="agree"
             />
 
             <Select
-              onChange={value => console.log(value)}
               label="Country"
               name="country"
-              placeholder="Select a country..."
               options={[
                 { value: 'SP', label: 'Spain' },
                 { value: 'JP', label: 'Japan' }
               ]}
+              placeholder="Select a country..."
             />
             <div style={{ width: '50%' }}>
               <Button text="Submit" />

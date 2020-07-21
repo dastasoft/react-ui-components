@@ -27,22 +27,22 @@ const Input = ({
   return (
     <Wrapper className={className}>
       <Label
-        name={name}
         label={label}
+        name={name}
         required={required}
         withoutMarker={labelWOMarker}
       />
       <StyledInput
+        ref={register(rules)}
         className={inputClassName}
-        type={inputType}
+        disabled={disabled}
+        error={errorMessage}
         id={name}
         name={name}
         placeholder={placeholder}
-        disabled={disabled}
-        ref={register(rules)}
-        onChange={onChangeHandler}
+        type={inputType}
         onBlur={onBlur}
-        error={errorMessage}
+        onChange={onChangeHandler}
       />
       <ValidationMessage message={errorMessage} />
     </Wrapper>

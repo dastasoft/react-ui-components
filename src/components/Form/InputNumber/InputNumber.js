@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { bool, string, object, func, number, node } from 'prop-types';
+import { bool, func, node, number, object, string } from 'prop-types';
 import { useFormContext } from 'react-hook-form';
 
 import Label from '../Label';
@@ -74,28 +73,28 @@ const InputNumber = ({
   return (
     <Wrapper className={className}>
       <Label
-        name={name}
         label={label}
+        name={name}
         required={required}
         withoutMarker={labelWOMarker}
       />
       <Container {...commonProps} height={height}>
         <StyledInput
+          ref={register(rules)}
+          borderErrorColor={borderErrorColor}
+          borderRadius={borderRadius}
           className={inputClassName}
-          type="number"
+          defaultValue={defaultValue}
+          disabled={disabled}
+          error={errorMessage}
           id={name}
           name={name}
           placeholder={placeholder}
-          disabled={disabled}
-          ref={register(rules)}
+          theFocusColor={theFocusColor}
+          type="number"
+          onBlur={onBlurHandler}
           onChange={onChangeHandler}
           onFocus={onFocusHandler}
-          onBlur={onBlurHandler}
-          defaultValue={defaultValue}
-          borderRadius={borderRadius}
-          theFocusColor={theFocusColor}
-          error={errorMessage}
-          borderErrorColor={borderErrorColor}
         />
         <Buttons>
           <Increment onClick={onIncrement} {...actionCommonProps}>
@@ -205,12 +204,12 @@ const Buttons = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 1rem;
+  width: 1.3rem;
 `;
 
 const Action = styled.div`
   cursor: pointer;
-  padding: 0.2rem;
+  padding: 0.3rem;
   display: flex;
   justify-content: center;
   align-items: center;

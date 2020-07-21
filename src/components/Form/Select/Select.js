@@ -27,7 +27,6 @@ const Select = ({
   customDropdownIcon,
   customDropdownColor,
   customTheme,
-  isMobile,
   onChange
 }) => {
   const { errors, control } = useFormContext();
@@ -67,46 +66,37 @@ const Select = ({
     );
   };
 
-  const onClickHanlder = () => {
-    if (isMobile) return;
-    setMenuIsOpen(!menuIsOpen);
-  };
-
-  const onTouchHanlder = () => {
-    if (!isMobile) return;
-    setMenuIsOpen(!menuIsOpen);
-  };
-
   return (
     <Wrapper className={className}>
       <Label
-        name={name}
         label={label}
+        name={name}
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <div role="button" onClick={onClickHanlder} onTouchStart={onTouchHanlder}>
+      <div role="button">
         <Controller
           control={control}
+          id={name}
+          name={name}
           render={props => (
             <ReactSelect
-              menuIsOpen={menuIsOpen}
+              className={selectClassName}
+              components={{ DropdownIndicator, IndicatorSeparator: null }}
+              defaulValue={defaultValue || { value: '', label: '' }}
+              isDisabled={disabled}
               options={options}
               placeholder={placeholder}
-              className={selectClassName}
-              isDisabled={disabled}
+              styles={{ ...styles, ...customStyles }}
+              theme={customTheme}
               onChange={value => {
                 onChange(value);
                 props.onChange(value);
               }}
-              components={{ DropdownIndicator, IndicatorSeparator: null }}
-              styles={{ ...styles, ...customStyles }}
-              theme={customTheme}
-              defaulValue={defaultValue || { value: '', label: '' }}
+              onMenuClose={() => setMenuIsOpen(false)}
+              onMenuOpen={() => setMenuIsOpen(true)}
             />
           )}
-          id={name}
-          name={name}
           rules={rules}
         />
       </div>
@@ -130,7 +120,6 @@ Select.propTypes = {
   customTheme: object,
   customDropdownIcon: node,
   customDropdownColor: string,
-  isMobile: bool,
   onChange: func
 };
 
@@ -148,7 +137,6 @@ Select.defaultProps = {
   customTheme: {},
   customDropdownIcon: null,
   customDropdownColor: 'black',
-  isMobile: false,
   onChange: () => {}
 };
 

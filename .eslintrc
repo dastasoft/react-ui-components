@@ -9,6 +9,32 @@
   },
   "rules": {
     "jsx-a11y/href-no-hash": ["off"],
-    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ],
+    // "react/sort-prop-types": [
+    //   "warn",
+    //   {
+    //     "callbacksLast": true,
+    //     "ignoreCase": false,
+    //     "requiredFirst": true,
+    //     "sortShapeProp": true,
+    //     "noSortAlphabetically": false
+    //   }
+    // ],
+    // "react/jsx-sort-default-props": [
+    //   "warn",
+    //   {
+    //     "ignoreCase": false
+    //   }
+    // ],
+    "react/jsx-props-no-spreading": ["off"]
   }
 }

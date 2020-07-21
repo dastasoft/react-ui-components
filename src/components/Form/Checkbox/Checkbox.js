@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -36,8 +37,8 @@ const Checkbox = ({
 
   const theLabel = (
     <Label
-      name={name}
       label={label}
+      name={name}
       required={required}
       withoutMarker={labelWOMarker}
     />
@@ -46,10 +47,10 @@ const Checkbox = ({
   const CheckboxIcon = props => (
     <SVG
       {...props}
-      viewBox="0 0 512 512"
       aria-hidden="true"
       focusable="false"
       role="img"
+      viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
     >
       {props.checked ? (
@@ -64,22 +65,22 @@ const Checkbox = ({
     <Wrapper className={className}>
       {isCustom ? (
         <>
-          <Container onClick={onClickHandler} disabled={disabled}>
+          <Container disabled={disabled} onClick={onClickHandler}>
             <StyledCheckbox
-              className={checkboxClassName}
-              type="checkbox"
-              name={name}
-              disabled={disabled}
               ref={register(rules)}
+              className={checkboxClassName}
+              disabled={disabled}
+              name={name}
+              type="checkbox"
               onChange={onChangeHandler}
             />
             <CheckboxIcon
-              checked={checked}
-              error={errorMessage}
-              fill={checkColor}
               bgColor={bgColor}
               borderColor={borderColor}
               borderRadius={borderRadius}
+              checked={checked}
+              error={errorMessage}
+              fill={checkColor}
               size={size}
             />
             {theLabel}
@@ -88,22 +89,22 @@ const Checkbox = ({
       ) : (
         <>
           {theLabel}
-          <Container onClick={onClickHandler} disabled={disabled}>
+          <Container disabled={disabled} onClick={onClickHandler}>
             <StyledCheckbox
-              className={checkboxClassName}
-              type="checkbox"
-              name={name}
-              disabled={disabled}
               ref={register(rules)}
+              className={checkboxClassName}
+              disabled={disabled}
+              name={name}
+              type="checkbox"
               onChange={onChangeHandler}
             />
             <CheckboxIcon
-              checked={checked}
-              error={errorMessage}
-              fill={checkColor}
               bgColor={bgColor}
               borderColor={borderColor}
               borderRadius={borderRadius}
+              checked={checked}
+              error={errorMessage}
+              fill={checkColor}
               size={size}
             />
           </Container>
