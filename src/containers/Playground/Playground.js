@@ -65,7 +65,8 @@ const Playground = () => {
                   message: 'must be greather than 1'
                 }
               }}
-              borderColor="blue"
+              focusColor="blue"
+              blurColor="teal"
               borderRadius="4px"
             />
 

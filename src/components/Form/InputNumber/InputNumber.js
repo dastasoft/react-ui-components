@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { bool, string, object, func, number, node } from 'prop-types';
 import { useFormContext } from 'react-hook-form';
@@ -18,19 +18,22 @@ const InputNumber = ({
   placeholder,
   disabled,
   rules,
+  height,
   onChangeHandler,
+  onFocus,
   onBlur,
   max,
   min,
   defaultValue,
   upIcon,
   downIcon,
-  actionsColor,
+  focusColor,
+  blurColor,
   actionsBgColor,
-  borderColor,
   borderErrorColor,
   borderRadius
 }) => {
+  const [theFocusColor, setTheFocusColor] = useState(blurColor);
   const { register, errors, getValues, setValue } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
@@ -45,9 +48,19 @@ const InputNumber = ({
     if (currentValue > min) setValue(name, parseInt(currentValue, 10) - 1);
   };
 
+  const onFocusHandler = event => {
+    setTheFocusColor(focusColor);
+    onFocus(event);
+  };
+
+  const onBlurHandler = event => {
+    setTheFocusColor(blurColor);
+    onBlur(event);
+  };
+
   const commonProps = {
     error: errorMessage,
-    borderColor,
+    theFocusColor,
     borderErrorColor,
     borderRadius
   };
@@ -66,7 +79,7 @@ const InputNumber = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <Container {...commonProps}>
+      <Container {...commonProps} height={height}>
         <StyledInput
           className={inputClassName}
           type="number"
@@ -76,16 +89,20 @@ const InputNumber = ({
           disabled={disabled}
           ref={register(rules)}
           onChange={onChangeHandler}
-          onBlur={onBlur}
+          onFocus={onFocusHandler}
+          onBlur={onBlurHandler}
           defaultValue={defaultValue}
           borderRadius={borderRadius}
+          theFocusColor={theFocusColor}
+          error={errorMessage}
+          borderErrorColor={borderErrorColor}
         />
         <Buttons>
           <Increment onClick={onIncrement} {...actionCommonProps}>
-            {upIcon || <Caret up fill={actionsColor} />}
+            {upIcon || <Caret up fill={theFocusColor} />}
           </Increment>
           <Decrement onClick={onDecrement} {...actionCommonProps}>
-            {downIcon || <Caret down fill={actionsColor} />}
+            {downIcon || <Caret down fill={theFocusColor} />}
           </Decrement>
         </Buttons>
       </Container>
@@ -103,16 +120,18 @@ InputNumber.propTypes = {
   placeholder: string,
   disabled: bool,
   rules: object,
+  height: string,
   onChangeHandler: func,
+  onFocus: func,
   onBlur: func,
   defaultValue: number,
   max: number,
   min: number,
   upIcon: node,
+  focusColor: string,
+  blurColor: string,
   downIcon: node,
-  actionsColor: string,
   actionsBgColor: string,
-  borderColor: string,
   borderErrorColor: string,
   borderRadius: string
 };
@@ -125,16 +144,18 @@ InputNumber.defaultProps = {
   placeholder: '',
   disabled: false,
   rules: {},
+  height: '100%',
   onChangeHandler: () => {},
+  onFocus: () => {},
   onBlur: () => {},
   defaultValue: 0,
   max: 99,
   min: 0,
   upIcon: null,
+  focusColor: '#000000',
+  blurColor: '#000000',
   downIcon: null,
-  actionsColor: '#000000',
-  actionsBgColor: '#ffffff',
-  borderColor: '#000000',
+  actionsBgColor: 'gray',
   borderErrorColor: 'red',
   borderRadius: '0'
 };
@@ -150,10 +171,11 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   border: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
+    ${({ error, theFocusColor, borderErrorColor }) =>
+      error ? borderErrorColor : theFocusColor};
   border-radius: ${({ borderRadius }) => borderRadius};
   width: inherit;
+  height: ${({ height }) => height};
 `;
 
 const StyledInput = styled.input`
@@ -163,6 +185,8 @@ const StyledInput = styled.input`
     ${({ borderRadius }) => borderRadius};
   width: calc(100% - 1rem);
   -moz-appearance: textfield;
+  color: ${({ error, theFocusColor, borderErrorColor }) =>
+    error ? borderErrorColor : theFocusColor};
 
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -171,21 +195,29 @@ const StyledInput = styled.input`
 
   :focus {
     outline: none;
+    color: ${({ error, theFocusColor, borderErrorColor }) =>
+      error ? borderErrorColor : theFocusColor};
   }
 `;
 
 const Buttons = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 1rem;
 `;
 
 const Action = styled.div`
   cursor: pointer;
-  background-color: ${({ actionsBgColor }) => actionsBgColor};
   padding: 0.2rem;
   display: flex;
+  justify-content: center;
   align-items: center;
+
+  :hover {
+    background-color: ${({ actionsBgColor }) => actionsBgColor};
+  }
 
   svg {
     width: 100%;
@@ -197,19 +229,26 @@ const Increment = styled(Action)`
   border-right: 1px solid transparent;
   border-bottom: 1px solid transparent;
   border-left: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
+    ${({ error, theFocusColor, borderErrorColor }) =>
+      error ? borderErrorColor : theFocusColor};
   border-radius: 0 ${({ borderRadius }) => borderRadius} 0 0;
+  flex-grow: 1;
+
+  svg {
+    margin-top: 1px;
+    margin-bottom: -1px;
+  }
 `;
 
 const Decrement = styled(Action)`
   border-top: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
+    ${({ error, theFocusColor, borderErrorColor }) =>
+      error ? borderErrorColor : theFocusColor};
   border-right: 1px solid transparent;
   border-bottom: 1px solid transparent;
   border-left: 1px solid
-    ${({ error, borderColor, borderErrorColor }) =>
-      error ? borderErrorColor : borderColor};
+    ${({ error, theFocusColor, borderErrorColor }) =>
+      error ? borderErrorColor : theFocusColor};
   border-radius: 0 0 ${({ borderRadius }) => borderRadius} 0;
+  flex-grow: 1;
 `;
