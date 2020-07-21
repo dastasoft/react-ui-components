@@ -17,7 +17,7 @@ const Playground = () => {
       <Holder>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Input
+            {/* <Input
               label="Name"
               name="name"
               rules={{
@@ -41,7 +41,7 @@ const Playground = () => {
                   message: 'invalid email address'
                 }
               }}
-            />
+            /> */}
 
             <InputNumber
               label=""
@@ -69,15 +69,22 @@ const Playground = () => {
               borderRadius="4px"
             />
 
-            <Checkbox label="Agree" name="agree" />
-
             <Checkbox
+              label="Agree"
+              name="agree"
+              bgColor="royalBlue"
+              borderColor="royalBlue"
+              checkColor="papayawhip"
+            />
+
+            {/* <Checkbox
               label="Test sadsd wqewqe asdosado we"
               name="agree3"
               isCustom
-            />
+              size="1rem"
+            /> */}
 
-            <Select
+            {/* <Select
               label="Country"
               name="country"
               placeholder="Select a country..."
@@ -88,10 +95,10 @@ const Playground = () => {
               rules={{
                 required: 'Must select a value'
               }}
-            />
-            <div style={{ width: '50%' }}>
+            /> */}
+            {/* <div style={{ width: '50%' }}>
               <Button text="Submit" />
-            </div>
+            </div> */}
           </Form>
         </FormProvider>
       </Holder>
