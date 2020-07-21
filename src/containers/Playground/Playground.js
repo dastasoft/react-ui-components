@@ -43,28 +43,11 @@ const Playground = () => {
               }}
             /> */}
 
-            <InputNumber
-              label=""
-              name="day"
-              rules={{
-                required: 'Required',
-                min: {
-                  value: 1,
-                  message: 'must be greather than 1'
-                }
-              }}
-            />
+            <InputNumber label="" name="day" />
 
             <InputNumber
               label=""
               name="month"
-              rules={{
-                required: 'Required',
-                min: {
-                  value: 1,
-                  message: 'must be greather than 1'
-                }
-              }}
               borderColor="blue"
               borderRadius="4px"
             />
@@ -84,7 +67,7 @@ const Playground = () => {
               size="1rem"
             /> */}
 
-            {/* <Select
+            <Select
               label="Country"
               name="country"
               placeholder="Select a country..."
@@ -92,13 +75,10 @@ const Playground = () => {
                 { value: 'SP', label: 'Spain' },
                 { value: 'JP', label: 'Japan' }
               ]}
-              rules={{
-                required: 'Must select a value'
-              }}
-            /> */}
-            {/* <div style={{ width: '50%' }}>
+            />
+            <div style={{ width: '50%' }}>
               <Button text="Submit" />
-            </div> */}
+            </div>
           </Form>
         </FormProvider>
       </Holder>
@@ -152,6 +132,6 @@ const ComponentTitle = styled.h2`
 
 const Form = styled.form`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1rem 2rem;
 `;
