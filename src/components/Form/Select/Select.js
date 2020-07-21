@@ -27,7 +27,8 @@ const Select = ({
   customDropdownIcon,
   customDropdownColor,
   customTheme,
-  onChange
+  onChange,
+  noOptionsMessage
 }) => {
   const { errors, control } = useFormContext();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -85,6 +86,7 @@ const Select = ({
               components={{ DropdownIndicator, IndicatorSeparator: null }}
               defaulValue={defaultValue || { value: '', label: '' }}
               isDisabled={disabled}
+              noOptionsMessage={() => noOptionsMessage}
               options={options}
               placeholder={placeholder}
               styles={{ ...styles, ...customStyles }}
@@ -120,7 +122,8 @@ Select.propTypes = {
   customTheme: object,
   customDropdownIcon: node,
   customDropdownColor: string,
-  onChange: func
+  onChange: func,
+  noOptionsMessage: string
 };
 
 Select.defaultProps = {
@@ -137,7 +140,8 @@ Select.defaultProps = {
   customTheme: {},
   customDropdownIcon: null,
   customDropdownColor: 'black',
-  onChange: () => {}
+  onChange: () => {},
+  noOptionsMessage: ''
 };
 
 export default Select;

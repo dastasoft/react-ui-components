@@ -37,10 +37,6 @@ const Playground = () => {
             <Select
               label="Country"
               name="country"
-              options={[
-                { value: 'SP', label: 'Spain' },
-                { value: 'JP', label: 'Japan' }
-              ]}
               placeholder="Select a country..."
             />
             <div style={{ width: '50%' }}>

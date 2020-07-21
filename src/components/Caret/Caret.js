@@ -4,7 +4,7 @@ import { bool, string } from 'prop-types';
 
 const Caret = ({ down, fill }) => (
   <svg
-    down={down}
+    down={down.toString()}
     aria-hidden="true"
     focusable="false"
     data-icon="caret-up"
