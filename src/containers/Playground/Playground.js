@@ -35,6 +35,7 @@ const Playground = () => {
             />
 
             <Select
+              onChange={value => console.log(value)}
               label="Country"
               name="country"
               placeholder="Select a country..."

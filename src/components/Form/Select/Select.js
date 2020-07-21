@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
-import { bool, string, array, object, node } from 'prop-types';
+import { bool, string, array, object, node, func } from 'prop-types';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
@@ -26,7 +26,9 @@ const Select = ({
   customStyles,
   customDropdownIcon,
   customDropdownColor,
-  customTheme
+  customTheme,
+  isMobile,
+  onChange
 }) => {
   const { errors, control } = useFormContext();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -65,6 +67,16 @@ const Select = ({
     );
   };
 
+  const onClickHanlder = () => {
+    if (isMobile) return;
+    setMenuIsOpen(!menuIsOpen);
+  };
+
+  const onTouchHanlder = () => {
+    if (!isMobile) return;
+    setMenuIsOpen(!menuIsOpen);
+  };
+
   return (
     <Wrapper className={className}>
       <Label
@@ -73,7 +85,7 @@ const Select = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <div role="button" onClick={() => setMenuIsOpen(!menuIsOpen)}>
+      <div role="button" onClick={onClickHanlder} onTouchStart={onTouchHanlder}>
         <Controller
           control={control}
           render={props => (
@@ -83,7 +95,10 @@ const Select = ({
               placeholder={placeholder}
               className={selectClassName}
               isDisabled={disabled}
-              onChange={props.onChange}
+              onChange={value => {
+                onChange(value);
+                props.onChange(value);
+              }}
               components={{ DropdownIndicator, IndicatorSeparator: null }}
               styles={{ ...styles, ...customStyles }}
               theme={customTheme}
@@ -114,7 +129,9 @@ Select.propTypes = {
   customStyles: object,
   customTheme: object,
   customDropdownIcon: node,
-  customDropdownColor: string
+  customDropdownColor: string,
+  isMobile: bool,
+  onChange: func
 };
 
 Select.defaultProps = {
@@ -130,7 +147,9 @@ Select.defaultProps = {
   customStyles: {},
   customTheme: {},
   customDropdownIcon: null,
-  customDropdownColor: 'black'
+  customDropdownColor: 'black',
+  isMobile: false,
+  onChange: () => {}
 };
 
 export default Select;
