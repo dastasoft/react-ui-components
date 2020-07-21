@@ -1,5 +1,5 @@
-/* eslint-disable react/forbid-prop-types */
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
 import { string, bool, object, func } from 'prop-types';
@@ -16,13 +16,21 @@ const Checkbox = ({
   disabled,
   rules,
   onChangeHandler,
-  isCustom
+  borderColor,
+  borderRadius,
+  bgColor,
+  checkColor,
+  isCustom,
+  size
 }) => {
+  const [checked, setChecked] = useState(false);
   const { register, errors, setValue, getValues } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
+
   const onClickHandler = () => {
     if (disabled) return;
+    setChecked(!getValues(name));
     setValue(name, !getValues(name));
   };
 
@@ -33,6 +41,23 @@ const Checkbox = ({
       required={required}
       withoutMarker={labelWOMarker}
     />
+  );
+
+  const CheckboxIcon = props => (
+    <SVG
+      {...props}
+      viewBox="0 0 512 512"
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {props.checked ? (
+        <path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" />
+      ) : (
+        ''
+      )}
+    </SVG>
   );
 
   return (
@@ -48,7 +73,15 @@ const Checkbox = ({
               ref={register(rules)}
               onChange={onChangeHandler}
             />
-            <Checkmark error={errorMessage} />
+            <CheckboxIcon
+              checked={checked}
+              error={errorMessage}
+              fill={checkColor}
+              bgColor={bgColor}
+              borderColor={borderColor}
+              borderRadius={borderRadius}
+              size={size}
+            />
             {theLabel}
           </Container>
         </>
@@ -64,7 +97,15 @@ const Checkbox = ({
               ref={register(rules)}
               onChange={onChangeHandler}
             />
-            <Checkmark error={errorMessage} />
+            <CheckboxIcon
+              checked={checked}
+              error={errorMessage}
+              fill={checkColor}
+              bgColor={bgColor}
+              borderColor={borderColor}
+              borderRadius={borderRadius}
+              size={size}
+            />
           </Container>
           <ValidationMessage message={errorMessage} />
         </>
@@ -82,7 +123,12 @@ Checkbox.propTypes = {
   disabled: bool,
   rules: object,
   onChangeHandler: func,
-  isCustom: bool
+  borderColor: string,
+  borderRadius: string,
+  bgColor: string,
+  checkColor: string,
+  isCustom: bool,
+  size: string
 };
 
 Checkbox.defaultProps = {
@@ -93,7 +139,12 @@ Checkbox.defaultProps = {
   disabled: false,
   rules: {},
   onChangeHandler: () => {},
-  isCustom: false
+  borderColor: '#000000',
+  borderRadius: '0px',
+  bgColor: '#000000',
+  checkColor: '#ffffff',
+  isCustom: false,
+  size: '2rem'
 };
 
 export default Checkbox;
@@ -119,13 +170,12 @@ const Wrapper = styled.div`
 `;
 
 const StyledCheckbox = styled.input`
+  position: absolute;
   opacity: 0;
+  z-index: -1;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  height: 1.56rem;
-  width: 1.56rem;
   top: 10px;
   left: 0;
-  position: absolute;
 
   :checked ~ span {
     background-color: #2196f3;
@@ -140,25 +190,15 @@ const StyledCheckbox = styled.input`
   }
 `;
 
-const Checkmark = styled.span`
+const SVG = styled.svg`
   position: absolute;
   top: 5px;
   left: 0;
-  height: 2.1rem;
-  width: 2.1rem;
-  background-color: #fff;
-  border: 1px solid ${({ error }) => (error ? 'red' : 'black')};
-
-  :after {
-    content: '';
-    position: absolute;
-    display: none;
-    left: 12px;
-    top: 2px;
-    width: 0.5rem;
-    height: 1.5rem;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
+  height: ${({ size }) => size};
+  width: ${({ size }) => size};
+  background-color: ${({ bgColor, checked }) =>
+    checked ? bgColor : 'transparent'};
+  border: 1px solid ${({ error, borderColor }) => (error ? 'red' : borderColor)};
+  border-radius: ${({ borderRadius }) => borderRadius};
+  padding: 2px;
 `;

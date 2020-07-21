@@ -17,7 +17,7 @@ const Playground = () => {
       <Holder>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Input
+            {/* <Input
               label="Name"
               name="name"
               rules={{
@@ -41,42 +41,31 @@ const Playground = () => {
                   message: 'invalid email address'
                 }
               }}
-            />
+            /> */}
 
-            <InputNumber
-              label=""
-              name="day"
-              rules={{
-                required: 'Required',
-                min: {
-                  value: 1,
-                  message: 'must be greather than 1'
-                }
-              }}
-            />
+            <InputNumber label="" name="day" />
 
             <InputNumber
               label=""
               name="month"
-              rules={{
-                required: 'Required',
-                min: {
-                  value: 1,
-                  message: 'must be greather than 1'
-                }
-              }}
-              focusColor="blue"
-              blurColor="teal"
+              borderColor="blue"
               borderRadius="4px"
             />
 
-            <Checkbox label="Agree" name="agree" />
-
             <Checkbox
+              label="Agree"
+              name="agree"
+              bgColor="royalBlue"
+              borderColor="royalBlue"
+              checkColor="papayawhip"
+            />
+
+            {/* <Checkbox
               label="Test sadsd wqewqe asdosado we"
               name="agree3"
               isCustom
-            />
+              size="1rem"
+            /> */}
 
             <Select
               label="Country"
@@ -86,9 +75,6 @@ const Playground = () => {
                 { value: 'SP', label: 'Spain' },
                 { value: 'JP', label: 'Japan' }
               ]}
-              rules={{
-                required: 'Must select a value'
-              }}
             />
             <div style={{ width: '50%' }}>
               <Button text="Submit" />
@@ -146,6 +132,6 @@ const ComponentTitle = styled.h2`
 
 const Form = styled.form`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1rem 2rem;
 `;

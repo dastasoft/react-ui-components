@@ -1,12 +1,13 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
-import ReactSelect from 'react-select';
+import ReactSelect, { components } from 'react-select';
 import { bool, string, array, object, func } from 'prop-types';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
+import Caret from '../../Caret';
 
 const Select = ({
   className,
@@ -15,15 +16,17 @@ const Select = ({
   label,
   labelWOMarker,
   placeholder,
+  defaulValue,
   disabled,
   rules,
-  onChangeHandler,
   options,
   defaultValue,
   customStyles,
+  customDropdownIcon,
   customTheme
 }) => {
   const { errors, control } = useFormContext();
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
 
@@ -44,6 +47,18 @@ const Select = ({
     })
   };
 
+  const DropdownIndicator = props => {
+    return (
+      <components.DropdownIndicator {...props}>
+        {customDropdownIcon || (
+          <StyledCaret>
+            <Caret down={!menuIsOpen} />
+          </StyledCaret>
+        )}
+      </components.DropdownIndicator>
+    );
+  };
+
   return (
     <Wrapper className={className}>
       <Label
@@ -52,22 +67,28 @@ const Select = ({
         required={required}
         withoutMarker={labelWOMarker}
       />
-      <Controller
-        control={control}
-        as={ReactSelect}
-        rules={rules}
-        className={selectClassName}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        isDisabled={disabled}
-        onChange={onChangeHandler}
-        error={errorMessage}
-        options={options}
-        styles={{ ...styles, ...customStyles }}
-        defaulValue={defaultValue || { value: '', label: '' }}
-        theme={theme => ({ ...theme, ...customTheme })}
-      />
+      <div onClick={() => setMenuIsOpen(!menuIsOpen)}>
+        <Controller
+          control={control}
+          render={props => (
+            <ReactSelect
+              menuIsOpen={menuIsOpen}
+              options={options}
+              placeholder={placeholder}
+              className={selectClassName}
+              isDisabled={disabled}
+              onChange={props.onChange}
+              components={{ DropdownIndicator, IndicatorSeparator: null }}
+            />
+          )}
+          id={name}
+          name={name}
+          rules={rules}
+          styles={{ ...styles, ...customStyles }}
+          defaulValue={defaulValue || { value: '', label: '' }}
+          theme={theme => ({ ...theme, ...customTheme })}
+        />
+      </div>
       <ValidationMessage message={errorMessage} />
     </Wrapper>
   );
@@ -110,4 +131,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+const StyledCaret = styled.div`
+  width: 1rem;
+  display: flex;
+
+  svg {
+    width: 100%;
+  }
 `;
