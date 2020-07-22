@@ -58,6 +58,10 @@ const Button = styled(ButtonBase)`
       transform: translate3d(0, 0, -1em);
     }
   }
+
+  &:disabled {
+    background: gray;
+  }
 `;
 
 Button.propTypes = {

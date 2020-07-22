@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
-import { string, bool, object, func } from 'prop-types';
+import { string, bool, object, func, node } from 'prop-types';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
 
 const Checkbox = ({
+  children,
   className,
   checkboxClassName,
   name,
@@ -21,7 +22,6 @@ const Checkbox = ({
   borderRadius,
   bgColor,
   checkColor,
-  isCustom,
   size
 }) => {
   const [checked, setChecked] = useState(false);
@@ -34,15 +34,6 @@ const Checkbox = ({
     setChecked(!getValues(name));
     setValue(name, !getValues(name));
   };
-
-  const theLabel = (
-    <Label
-      label={label}
-      name={name}
-      required={required}
-      withoutMarker={labelWOMarker}
-    />
-  );
 
   const CheckboxIcon = props => (
     <SVG
@@ -63,59 +54,41 @@ const Checkbox = ({
 
   return (
     <Wrapper className={className}>
-      {isCustom ? (
-        <>
-          <Container disabled={disabled} onClick={onClickHandler}>
-            <StyledCheckbox
-              ref={register(rules)}
-              className={checkboxClassName}
-              disabled={disabled}
-              name={name}
-              type="checkbox"
-              onChange={onChangeHandler}
-            />
-            <CheckboxIcon
-              bgColor={bgColor}
-              borderColor={borderColor}
-              borderRadius={borderRadius}
-              checked={checked}
-              error={errorMessage}
-              fill={checkColor}
-              size={size}
-            />
-            {theLabel}
-          </Container>
-        </>
-      ) : (
-        <>
-          {theLabel}
-          <Container disabled={disabled} onClick={onClickHandler}>
-            <StyledCheckbox
-              ref={register(rules)}
-              className={checkboxClassName}
-              disabled={disabled}
-              name={name}
-              type="checkbox"
-              onChange={onChangeHandler}
-            />
-            <CheckboxIcon
-              bgColor={bgColor}
-              borderColor={borderColor}
-              borderRadius={borderRadius}
-              checked={checked}
-              error={errorMessage}
-              fill={checkColor}
-              size={size}
-            />
-          </Container>
-          <ValidationMessage message={errorMessage} />
-        </>
+      {label && (
+        <Label
+          label={label}
+          name={name}
+          required={required}
+          withoutMarker={labelWOMarker}
+        />
       )}
+      <Container disabled={disabled} onClick={onClickHandler}>
+        <StyledCheckbox
+          ref={register(rules)}
+          className={checkboxClassName}
+          disabled={disabled}
+          name={name}
+          type="checkbox"
+          onChange={onChangeHandler}
+        />
+        <CheckboxIcon
+          bgColor={bgColor}
+          borderColor={borderColor}
+          borderRadius={borderRadius}
+          checked={checked}
+          error={errorMessage}
+          fill={checkColor}
+          size={size}
+        />
+        {children}
+      </Container>
+      <ValidationMessage message={errorMessage} />
     </Wrapper>
   );
 };
 
 Checkbox.propTypes = {
+  children: node,
   className: string,
   checkboxClassName: string,
   name: string.isRequired,
@@ -128,11 +101,11 @@ Checkbox.propTypes = {
   borderRadius: string,
   bgColor: string,
   checkColor: string,
-  isCustom: bool,
   size: string
 };
 
 Checkbox.defaultProps = {
+  children: null,
   className: '',
   checkboxClassName: '',
   label: '',

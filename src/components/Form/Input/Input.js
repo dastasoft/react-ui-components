@@ -26,12 +26,14 @@ const Input = ({
 
   return (
     <Wrapper className={className}>
-      <Label
-        label={label}
-        name={name}
-        required={required}
-        withoutMarker={labelWOMarker}
-      />
+      {label && (
+        <Label
+          label={label}
+          name={name}
+          required={required}
+          withoutMarker={labelWOMarker}
+        />
+      )}
       <StyledInput
         ref={register(rules)}
         className={inputClassName}

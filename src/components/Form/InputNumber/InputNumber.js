@@ -30,30 +30,37 @@ const InputNumber = ({
   blurColor,
   actionsBgColor,
   borderErrorColor,
-  borderRadius
+  borderRadius,
+  additionalErrorMsg
 }) => {
   const [theFocusColor, setTheFocusColor] = useState(blurColor);
   const { register, errors, getValues, setValue } = useFormContext();
-  const errorMessage = errors[name] ? errors[name].message : '';
+  const errorMessage =
+    (errors[name] ? errors[name].message : '') ||
+    (errors[name] && errors[name].type ? additionalErrorMsg : '');
   const required = 'required' in rules;
+
+  const fieldActions = { shouldValidate: true, shouldDirty: true };
 
   const onIncrement = () => {
     const currentValue = getValues(name);
-    if (currentValue < max) setValue(name, parseInt(currentValue, 10) + 1);
+    if (currentValue < max)
+      setValue(name, parseInt(currentValue, 10) + 1, fieldActions);
   };
 
   const onDecrement = () => {
     const currentValue = getValues(name);
-    if (currentValue > min) setValue(name, parseInt(currentValue, 10) - 1);
+    if (currentValue > min)
+      setValue(name, parseInt(currentValue, 10) - 1, fieldActions);
   };
 
   const onFocusHandler = event => {
-    setTheFocusColor(focusColor);
+    setTheFocusColor(errorMessage ? borderErrorColor : focusColor);
     onFocus(event);
   };
 
   const onBlurHandler = event => {
-    setTheFocusColor(blurColor);
+    setTheFocusColor(errorMessage ? borderErrorColor : blurColor);
     onBlur(event);
   };
 
@@ -72,12 +79,14 @@ const InputNumber = ({
 
   return (
     <Wrapper className={className}>
-      <Label
-        label={label}
-        name={name}
-        required={required}
-        withoutMarker={labelWOMarker}
-      />
+      {label && (
+        <Label
+          label={label}
+          name={name}
+          required={required}
+          withoutMarker={labelWOMarker}
+        />
+      )}
       <Container {...commonProps} height={height}>
         <StyledInput
           ref={register(rules)}
@@ -132,7 +141,8 @@ InputNumber.propTypes = {
   downIcon: node,
   actionsBgColor: string,
   borderErrorColor: string,
-  borderRadius: string
+  borderRadius: string,
+  additionalErrorMsg: string
 };
 
 InputNumber.defaultProps = {
@@ -156,7 +166,8 @@ InputNumber.defaultProps = {
   downIcon: null,
   actionsBgColor: 'gray',
   borderErrorColor: 'red',
-  borderRadius: '0'
+  borderRadius: '0',
+  additionalErrorMsg: ''
 };
 
 export default InputNumber;

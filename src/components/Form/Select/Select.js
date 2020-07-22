@@ -69,39 +69,40 @@ const Select = ({
 
   return (
     <Wrapper className={className}>
-      <Label
-        label={label}
-        name={name}
-        required={required}
-        withoutMarker={labelWOMarker}
-      />
-      <div role="button">
-        <Controller
-          control={control}
-          id={name}
+      {label && (
+        <Label
+          label={label}
           name={name}
-          render={props => (
-            <ReactSelect
-              className={selectClassName}
-              components={{ DropdownIndicator, IndicatorSeparator: null }}
-              defaulValue={defaultValue || { value: '', label: '' }}
-              isDisabled={disabled}
-              noOptionsMessage={() => noOptionsMessage}
-              options={options}
-              placeholder={placeholder}
-              styles={{ ...styles, ...customStyles }}
-              theme={customTheme}
-              onChange={value => {
-                onChange(value);
-                props.onChange(value);
-              }}
-              onMenuClose={() => setMenuIsOpen(false)}
-              onMenuOpen={() => setMenuIsOpen(true)}
-            />
-          )}
-          rules={rules}
+          required={required}
+          withoutMarker={labelWOMarker}
         />
-      </div>
+      )}
+      <Controller
+        control={control}
+        id={name}
+        name={name}
+        render={props => (
+          <ReactSelect
+            className={selectClassName}
+            components={{ DropdownIndicator, IndicatorSeparator: null }}
+            defaulValue={defaultValue || { value: '', label: '' }}
+            isDisabled={disabled}
+            noOptionsMessage={() => noOptionsMessage}
+            options={options}
+            placeholder={placeholder}
+            styles={{ ...styles, ...customStyles }}
+            theme={customTheme}
+            value={props.value}
+            onChange={value => {
+              onChange(value);
+              props.onChange(value);
+            }}
+            onMenuClose={() => setMenuIsOpen(false)}
+            onMenuOpen={() => setMenuIsOpen(true)}
+          />
+        )}
+        rules={rules}
+      />
       <ValidationMessage message={errorMessage} />
     </Wrapper>
   );

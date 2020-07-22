@@ -8,8 +8,16 @@ import { Input, InputNumber, Checkbox, Select } from '../../components/Form';
 import Button from '../../components/Button';
 
 const Playground = () => {
-  const methods = useForm();
+  const methods = useForm({ mode: 'onChange' });
   const onSubmit = values => console.log(values);
+
+  const onChangeValues = () => {
+    methods.setValue(
+      'country',
+      { value: 'FR', label: 'france' },
+      { shouldDirty: true, shouldValidate: true }
+    );
+  };
 
   return (
     <Wrapper>
@@ -37,10 +45,20 @@ const Playground = () => {
             <Select
               label="Country"
               name="country"
+              options={[
+                { value: 'SP', label: 'spain' },
+                { value: 'JP', label: 'japan' }
+              ]}
               placeholder="Select a country..."
+              rules={{ required: 'oso' }}
             />
-            <div style={{ width: '50%' }}>
-              <Button text="Submit" />
+            <div style={{ display: 'flex', width: '50%' }}>
+              <Button disabled={!methods.formState.isValid} text="Submit" />
+              <Button
+                text="Change values"
+                type="button"
+                onClick={onChangeValues}
+              />
             </div>
           </Form>
         </FormProvider>
@@ -56,6 +74,10 @@ const Playground = () => {
           speed={1}
         />
       </Holder> */}
+      <div style={{ display: 'flex' }}>
+        <pre>{JSON.stringify(methods.formState, null, 2)}</pre>
+        <pre>{JSON.stringify(methods.watch(), null, 2)}</pre>
+      </div>
     </Wrapper>
   );
 };
