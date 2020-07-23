@@ -85,7 +85,7 @@ const Select = ({
           <ReactSelect
             className={selectClassName}
             components={{ DropdownIndicator, IndicatorSeparator: null }}
-            defaulValue={defaultValue || { value: '', label: '' }}
+            defaultValue={defaultValue}
             isDisabled={disabled}
             noOptionsMessage={() => noOptionsMessage}
             options={options}
@@ -136,7 +136,7 @@ Select.defaultProps = {
   disabled: false,
   rules: {},
   options: [],
-  defaultValue: {},
+  defaultValue: null,
   customStyles: {},
   customTheme: {},
   customDropdownIcon: null,
