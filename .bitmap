@@ -65,6 +65,24 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "dastag.ui-components/checkbox@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/components/Checkbox/Checkbox.js",
+                "test": false,
+                "name": "Checkbox.js"
+            },
+            {
+                "relativePath": "src/components/Checkbox/index.js",
+                "test": false,
+                "name": "index.js"
+            }
+        ],
+        "mainFile": "src/components/Checkbox/index.js",
+        "trackDir": "src/components/Checkbox",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "dastag.ui-components/circle-progress-bar@0.0.4": {
         "files": [
             {

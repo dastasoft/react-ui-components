@@ -6,6 +6,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import CircleProgressBar from '../../components/CircleProgressBar';
 import { Input, InputNumber, Checkbox, Select } from '../../components/Form';
 import Button from '../../components/Button';
+import CheckboxSimple from '../../components/Checkbox';
 
 const Playground = () => {
   const methods = useForm({ mode: 'onChange' });
