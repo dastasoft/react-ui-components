@@ -32,7 +32,7 @@ const InputNumber = ({
   borderErrorColor,
   borderRadius,
   additionalErrorMsg,
-  ref
+  extraRef
 }) => {
   const [theFocusColor, setTheFocusColor] = useState(blurColor);
   const { register, errors, getValues, setValue } = useFormContext();
@@ -92,7 +92,7 @@ const InputNumber = ({
         <StyledInput
           ref={event => {
             register(event, rules);
-            if (ref) ref.current = event;
+            if (extraRef) extraRef.current = event;
           }}
           borderErrorColor={borderErrorColor}
           borderRadius={borderRadius}
@@ -147,7 +147,7 @@ InputNumber.propTypes = {
   borderErrorColor: string,
   borderRadius: string,
   additionalErrorMsg: string,
-  ref: object
+  extraRef: object
 };
 
 InputNumber.defaultProps = {
@@ -173,7 +173,7 @@ InputNumber.defaultProps = {
   borderErrorColor: 'red',
   borderRadius: '0',
   additionalErrorMsg: '',
-  ref: null
+  extraRef: null
 };
 
 export default InputNumber;
