@@ -9,7 +9,7 @@ import Button from '../../components/Button';
 import CheckboxSimple from '../../components/Checkbox';
 
 const Playground = () => {
-  const methods = useForm({ mode: 'onChange' });
+  const methods = useForm({ mode: 'all' });
   const onSubmit = values => console.log(values);
 
   const onChangeValues = () => {
@@ -54,7 +54,7 @@ const Playground = () => {
               rules={{ required: 'oso' }}
             />
             <div style={{ display: 'flex', width: '50%' }}>
-              <Button disabled={!methods.formState.isValid} text="Submit" />
+              <Button text="Submit" />
               <Button
                 text="Change values"
                 type="button"
