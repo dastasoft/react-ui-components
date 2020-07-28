@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { string, bool, object, func, node } from 'prop-types';
+import { string, bool, func, node } from 'prop-types';
 
 const Checkbox = ({
   children,
@@ -15,6 +15,7 @@ const Checkbox = ({
   borderRadius,
   bgColor,
   checkColor,
+  onClick,
   size
 }) => {
   const [checked, setChecked] = useState(false);
@@ -22,6 +23,7 @@ const Checkbox = ({
   const onClickHandler = () => {
     if (disabled) return;
     setChecked(!checked);
+    onClick(!checked);
   };
 
   const CheckboxIcon = props => (
@@ -74,11 +76,13 @@ Checkbox.propTypes = {
   checkboxClassName: string,
   name: string.isRequired,
   onChangeHandler: func,
+  onClick: func,
   borderColor: string,
   borderRadius: string,
   bgColor: string,
   checkColor: string,
-  size: string
+  size: string,
+  disabled: bool
 };
 
 Checkbox.defaultProps = {
@@ -86,11 +90,13 @@ Checkbox.defaultProps = {
   className: '',
   checkboxClassName: '',
   onChangeHandler: () => {},
+  onClick: () => {},
   borderColor: '#000000',
   borderRadius: '0px',
   bgColor: '#000000',
   checkColor: '#ffffff',
-  size: '2rem'
+  size: '2rem',
+  disabled: false
 };
 
 export default Checkbox;

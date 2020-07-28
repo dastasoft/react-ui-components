@@ -65,7 +65,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/checkbox@0.0.1": {
+    "dastag.ui-components/checkbox@0.0.3": {
         "files": [
             {
                 "relativePath": "src/components/Checkbox/Checkbox.js",
