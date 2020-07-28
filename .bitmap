@@ -68,14 +68,14 @@
     "dastag.ui-components/checkbox@0.0.3": {
         "files": [
             {
-                "name": "Checkbox.js",
                 "relativePath": "src/components/Checkbox/Checkbox.js",
-                "test": false
+                "test": false,
+                "name": "Checkbox.js"
             },
             {
-                "name": "index.js",
                 "relativePath": "src/components/Checkbox/index.js",
-                "test": false
+                "test": false,
+                "name": "index.js"
             }
         ],
         "mainFile": "src/components/Checkbox/index.js",
@@ -106,7 +106,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/form@0.0.23": {
+    "dastag.ui-components/form@0.0.24": {
         "files": [
             {
                 "relativePath": "src/components/Form/Checkbox/Checkbox.js",

@@ -18,7 +18,7 @@ const InputNumber = ({
   disabled,
   rules,
   height,
-  onChangeHandler,
+  onChange,
   onFocus,
   onBlur,
   max,
@@ -106,7 +106,7 @@ const InputNumber = ({
           theFocusColor={theFocusColor}
           type="number"
           onBlur={onBlurHandler}
-          onChange={onChangeHandler}
+          onChange={onChange}
           onFocus={onFocusHandler}
         />
         <Buttons>
@@ -133,7 +133,7 @@ InputNumber.propTypes = {
   disabled: bool,
   rules: object,
   height: string,
-  onChangeHandler: func,
+  onChange: func,
   onFocus: func,
   onBlur: func,
   defaultValue: number,
@@ -159,7 +159,7 @@ InputNumber.defaultProps = {
   disabled: false,
   rules: {},
   height: '100%',
-  onChangeHandler: () => {},
+  onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
   defaultValue: 0,
