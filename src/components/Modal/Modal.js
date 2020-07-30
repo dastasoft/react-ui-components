@@ -82,9 +82,9 @@ Modal.defaultProps = {
   withHeader: false,
   bgColor: 'white',
   width: '',
-  minWidth: '35rem',
+  minWidth: 'none',
   height: '',
-  minHeight: '20rem',
+  minHeight: 'none',
   shadow: false,
   rounded: false,
   borderColor: '#ccc'

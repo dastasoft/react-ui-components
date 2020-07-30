@@ -179,7 +179,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/modal@0.0.9": {
+    "dastag.ui-components/modal@0.0.10": {
         "files": [
             {
                 "relativePath": "src/components/Modal/Modal.js",
