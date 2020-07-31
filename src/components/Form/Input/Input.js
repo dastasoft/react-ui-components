@@ -26,7 +26,7 @@ const Input = ({
   const required = 'required' in rules;
 
   const onKeyDown = event => {
-    let inputValue = event.target.value;
+    const inputValue = event.target.value;
     const key = event.keyCode || event.charCode;
     if (key && (key === 8 || key === 46)) {
       if (inputValue.slice(-1) === '/') {
@@ -127,6 +127,6 @@ const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: var(--input-placeholder-color);
+    color: var(--input-placeholder);
   }
 `;

@@ -106,7 +106,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/form@0.0.32": {
+    "dastag.ui-components/form@0.0.33": {
         "files": [
             {
                 "relativePath": "src/components/Form/Checkbox/Checkbox.js",
@@ -222,6 +222,18 @@
         ],
         "mainFile": "src/components/SideDrawer/index.js",
         "trackDir": "src/components/SideDrawer",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "dastag.ui-components/simple-button@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/components/SimpleButton.js",
+                "test": false,
+                "name": "SimpleButton.js"
+            }
+        ],
+        "mainFile": "src/components/SimpleButton.js",
         "origin": "AUTHORED",
         "exported": true
     },

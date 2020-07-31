@@ -38,17 +38,23 @@ const Select = ({
   const styles = {
     menu: provided => ({
       ...provided,
-      borderColor: `${errorMessage ? 'red' : 'black'}`,
+      borderColor: `${
+        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+      }`,
       outline: 'none'
     }),
     control: provided => ({
       ...provided,
-      borderColor: `${errorMessage ? 'red' : 'black'}`,
+      borderColor: `${
+        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+      }`,
       outline: 'none'
     }),
     placeholder: provided => ({
       ...provided,
-      color: `${errorMessage ? 'red' : 'black'}`
+      color: `${
+        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+      }`
     })
   };
 
@@ -59,7 +65,9 @@ const Select = ({
           <StyledCaret>
             <Caret
               down={!menuIsOpen}
-              fill={menuIsOpen ? customDropdownColor : 'black'}
+              fill={
+                menuIsOpen ? customDropdownColor : 'var(--select-primary-color)'
+              }
             />
           </StyledCaret>
         )}
@@ -140,7 +148,7 @@ Select.defaultProps = {
   customStyles: {},
   customTheme: {},
   customDropdownIcon: null,
-  customDropdownColor: 'black',
+  customDropdownColor: 'var(--select-primary-color)',
   onChange: () => {},
   noOptionsMessage: ''
 };
