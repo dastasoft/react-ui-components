@@ -25,7 +25,12 @@ const Playground = () => {
               customStyles={{
                 control: provided => ({
                   ...provided,
-                  color: 'red',
+                  fontSize: '19px',
+                  fotnWeight: '400',
+                  textTransform: 'uppercase'
+                }),
+                singleValue: provided => ({
+                  ...provided,
                   fontSize: '19px',
                   fotnWeight: '400',
                   textTransform: 'uppercase'

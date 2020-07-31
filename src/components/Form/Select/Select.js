@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
 import { bool, string, array, object, node, func } from 'prop-types';
-import merge from 'lodash.merge';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
@@ -36,26 +35,53 @@ const Select = ({
   const required = 'required' in rules;
 
   const styles = {
-    menu: provided => ({
-      ...provided,
-      borderColor: `${
-        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-      }`,
-      outline: 'none'
-    }),
-    control: provided => ({
-      ...provided,
-      borderColor: `${
-        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-      }`,
-      outline: 'none'
-    }),
-    placeholder: provided => ({
-      ...provided,
-      color: `${
-        errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-      }`
-    })
+    ...customStyles,
+    menu: provided => {
+      let defaults = {
+        borderColor: `${
+          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+        }`,
+        outline: 'none'
+      };
+
+      if (customStyles.menu) defaults = { ...defaults, ...customStyles.menu() };
+
+      return {
+        ...provided,
+        ...defaults
+      };
+    },
+    control: provided => {
+      let defaults = {
+        borderColor: `${
+          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+        }`,
+        outline: 'none'
+      };
+
+      if (customStyles.control)
+        defaults = { ...defaults, ...customStyles.control() };
+
+      return {
+        ...provided,
+        ...defaults
+      };
+    },
+    placeholder: provided => {
+      let defaults = {
+        color: `${
+          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
+        }`
+      };
+
+      if (customStyles.placeholder)
+        defaults = { ...defaults, ...customStyles.placeholder() };
+
+      return {
+        ...provided,
+        ...defaults
+      };
+    }
   };
 
   const DropdownIndicator = props => {
@@ -98,7 +124,7 @@ const Select = ({
             noOptionsMessage={() => noOptionsMessage}
             options={options}
             placeholder={placeholder}
-            styles={merge(styles, customStyles)}
+            styles={styles}
             theme={customTheme}
             value={props.value}
             onChange={value => {
