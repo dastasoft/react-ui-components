@@ -17,12 +17,37 @@ const Input = ({
   placeholder,
   disabled,
   rules,
-  onChangeHandler,
-  onBlur
+  onChange,
+  onBlur,
+  isDate
 }) => {
-  const { register, errors } = useFormContext();
+  const { register, errors, setValue } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
+
+  const onKeyDown = event => {
+    let inputValue = event.target.value;
+    const key = event.keyCode || event.charCode;
+    if (key && (key === 8 || key === 46)) {
+      if (inputValue.slice(-1) === '/') {
+        setValue(name, inputValue.slice(0, -2));
+      } else {
+        setValue(name, inputValue.slice(0, -1));
+      }
+    }
+  };
+
+  const onDateChangeHandler = event => {
+    const { value } = event.target;
+    console.log(event.target);
+    if (!value || isNaN(value.replace(/\//g, '')) || value.length === 11) {
+      setValue(name, value.slice(0, -1));
+      return;
+    }
+    const inputValue =
+      value.length === 2 || value.length === 5 ? `${value}/` : value;
+    setValue(name, inputValue);
+  };
 
   return (
     <Wrapper className={className}>
@@ -44,7 +69,8 @@ const Input = ({
         placeholder={placeholder}
         type={inputType}
         onBlur={onBlur}
-        onChange={onChangeHandler}
+        onChange={isDate ? onDateChangeHandler : onChange}
+        onKeyDown={isDate ? onKeyDown : () => {}}
       />
       <ValidationMessage message={errorMessage} />
     </Wrapper>
@@ -62,7 +88,8 @@ Input.propTypes = {
   disabled: bool,
   rules: object,
   onChangeHandler: func,
-  onBlur: func
+  onBlur: func,
+  isDate: bool
 };
 
 Input.defaultProps = {
@@ -75,7 +102,8 @@ Input.defaultProps = {
   disabled: false,
   rules: {},
   onChangeHandler: () => {},
-  onBlur: () => {}
+  onBlur: () => {},
+  isDate: false
 };
 
 export default Input;

@@ -3,78 +3,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import CircleProgressBar from '../../components/CircleProgressBar';
-import { Input, InputNumber, Checkbox, Select } from '../../components/Form';
-import Button from '../../components/Button';
-import CheckboxSimple from '../../components/Checkbox';
+import { Input } from '../../components/Form';
 
 const Playground = () => {
   const methods = useForm({ mode: 'all' });
   const onSubmit = values => console.log(values);
-
-  const onChangeValues = () => {
-    methods.setValue(
-      'country',
-      { value: 'FR', label: 'france' },
-      { shouldDirty: true, shouldValidate: true }
-    );
-  };
 
   return (
     <Wrapper>
       <ComponentTitle>Form</ComponentTitle>
       <Holder>
         <FormProvider {...methods}>
-          <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <InputNumber label="" name="day" />
-
-            <InputNumber
-              borderColor="blue"
-              borderRadius="4px"
-              label=""
-              name="month"
-            />
-
-            <Checkbox
-              bgColor="royalBlue"
-              borderColor="royalBlue"
-              checkColor="papayawhip"
-              label="Agree"
-              name="agree"
-            />
-
-            <Select
-              label="Country"
-              name="country"
-              options={[
-                { value: 'SP', label: 'spain' },
-                { value: 'JP', label: 'japan' }
-              ]}
-              placeholder="Select a country..."
-              rules={{ required: 'oso' }}
-            />
-            <div style={{ display: 'flex', width: '50%' }}>
-              <Button text="Submit" />
-              <Button
-                text="Change values"
-                type="button"
-                onClick={onChangeValues}
-              />
-            </div>
-          </Form>
+          <Form onSubmit={methods.handleSubmit(onSubmit)} />
+          <ComponentTitle>ExpireDateInput</ComponentTitle>
+          <Input label="Fecha expiracion" name="fechaExpiracion" isDate />
         </FormProvider>
       </Holder>
-
-      {/* <ComponentTitle>CircleProgressBar</ComponentTitle>
-      <Holder>
-        <CircleProgressBar
-          trailStrokeColor="gray"
-          strokeColor="teal"
-          percentage={75}
-          innerText="complete"
-          speed={1}
-        />
-      </Holder> */}
       <div style={{ display: 'flex' }}>
         <pre>{JSON.stringify(methods.formState, null, 2)}</pre>
         <pre>{JSON.stringify(methods.watch(), null, 2)}</pre>
