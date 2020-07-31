@@ -86,7 +86,7 @@ Input.propTypes = {
   placeholder: string,
   disabled: bool,
   rules: object,
-  onChangeHandler: func,
+  onChange: func,
   onBlur: func,
   isDate: bool
 };
@@ -100,7 +100,7 @@ Input.defaultProps = {
   placeholder: '',
   disabled: false,
   rules: {},
-  onChangeHandler: () => {},
+  onChange: () => {},
   onBlur: () => {},
   isDate: false
 };
@@ -114,11 +114,19 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
+  background-color: 'var(--input-bg-color)';
+  color: 'var(--input-primary-color)';
   padding: 0.5rem;
-  border: 1px solid ${({ error }) => (error ? 'red' : 'black')};
+  border: 1px solid
+    ${({ error }) =>
+      error ? 'var(--input-error)' : 'var(--input-primary-color)'};
   width: inherit;
 
   :focus {
     outline: none;
+  }
+
+  &::placeholder {
+    color: 'var(--input-placeholder-color)';
   }
 `;
