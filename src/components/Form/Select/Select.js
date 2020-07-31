@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
 import { bool, string, array, object, node, func } from 'prop-types';
+import merge from 'lodash.merge';
 
 import Label from '../Label';
 import ValidationMessage from '../ValidationMessage';
@@ -75,6 +75,10 @@ const Select = ({
     );
   };
 
+  useEffect(() => {
+    merge(styles, customStyles);
+  }, []);
+
   return (
     <Wrapper className={className}>
       {label && (
@@ -98,7 +102,7 @@ const Select = ({
             noOptionsMessage={() => noOptionsMessage}
             options={options}
             placeholder={placeholder}
-            styles={{ ...styles, ...customStyles }}
+            styles={styles}
             theme={customTheme}
             value={props.value}
             onChange={value => {
