@@ -6,7 +6,7 @@ const Label = ({ className, name, label, required, withoutMarker }) => {
   return (
     <Wrapper className={className} htmlFor={name}>
       {label}
-      {!withoutMarker && label && required && '*'}
+      {!withoutMarker && label && required && ' *'}
     </Wrapper>
   );
 };
@@ -34,4 +34,5 @@ const Wrapper = styled.label`
   margin-bottom: 0.2rem;
   padding: 0.1rem 0;
   font-weight: 600;
+  color: 'var(--label-primary-color)';
 `;
