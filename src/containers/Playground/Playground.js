@@ -3,7 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { Input } from '../../components/Form';
+import Select from '../../components/Form/Select';
+import Button from '../../components/Button';
 
 const Playground = () => {
   const methods = useForm({ mode: 'all' });
@@ -14,9 +15,25 @@ const Playground = () => {
       <ComponentTitle>Form</ComponentTitle>
       <Holder>
         <FormProvider {...methods}>
-          <Form onSubmit={methods.handleSubmit(onSubmit)} />
-          <ComponentTitle>ExpireDateInput</ComponentTitle>
-          <Input label="Fecha expiracion" name="fechaExpiracion" isDate />
+          <Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Select
+              placeholder="test"
+              label="test"
+              name="test"
+              options={[{ label: 'Spain', value: 'SP' }]}
+              rules={{ required: 'oso' }}
+              customStyles={{
+                control: provided => ({
+                  ...provided,
+                  color: 'red',
+                  fontSize: '19px',
+                  fotnWeight: '400',
+                  textTransform: 'uppercase'
+                })
+              }}
+            />
+            <Button text="Submit" />
+          </Form>
         </FormProvider>
       </Holder>
       <div style={{ display: 'flex' }}>
