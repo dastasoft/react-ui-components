@@ -39,7 +39,6 @@ const Input = ({
 
   const onDateChangeHandler = event => {
     const { value } = event.target;
-    console.log(event.target);
     if (!value || isNaN(value.replace(/\//g, '')) || value.length === 11) {
       setValue(name, value.slice(0, -1));
       return;
