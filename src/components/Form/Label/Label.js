@@ -34,5 +34,5 @@ const Wrapper = styled.label`
   margin-bottom: 0.2rem;
   padding: 0.1rem 0;
   font-weight: 600;
-  color: 'var(--label-primary-color)';
+  color: var(--label-primary-color);
 `;

@@ -114,8 +114,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-  background-color: 'var(--input-bg-color)';
-  color: 'var(--input-primary-color)';
+  background-color: var(--input-bg-color);
+  color: var(--input-primary-color);
   padding: 0.5rem;
   border: 1px solid
     ${({ error }) =>
@@ -127,6 +127,6 @@ const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: 'var(--input-placeholder-color)';
+    color: var(--input-placeholder-color);
   }
 `;
