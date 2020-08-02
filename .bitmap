@@ -237,5 +237,17 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "dastag.utils/use-translation@0.0.1": {
+        "files": [
+            {
+                "relativePath": "src/utils/useTranslation.js",
+                "test": false,
+                "name": "useTranslation.js"
+            }
+        ],
+        "mainFile": "src/utils/useTranslation.js",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "version": "14.8.8"
 }
