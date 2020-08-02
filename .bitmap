@@ -237,7 +237,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.utils/use-translation@0.0.1": {
+    "dastag.utils/use-translation@0.0.2": {
         "files": [
             {
                 "relativePath": "src/utils/useTranslation.js",
