@@ -56,6 +56,7 @@ const Checkbox = ({
     <Wrapper className={className}>
       {label && (
         <Label
+          disabled={disabled}
           label={label}
           name={name}
           required={required}
@@ -117,7 +118,6 @@ Checkbox.defaultProps = {
   borderRadius: '0px',
   bgColor: '#000000',
   checkColor: '#ffffff',
-  isCustom: false,
   size: '2rem'
 };
 

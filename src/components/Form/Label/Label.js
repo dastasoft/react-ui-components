@@ -2,9 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { bool, string } from 'prop-types';
 
-const Label = ({ className, name, label, required, withoutMarker }) => {
+const Label = ({
+  className,
+  name,
+  label,
+  required,
+  withoutMarker,
+  disabled
+}) => {
   return (
-    <Wrapper className={className} htmlFor={name}>
+    <Wrapper className={className} disabled={disabled} htmlFor={name}>
       {label}
       {!withoutMarker && label && required && ' *'}
     </Wrapper>
@@ -16,7 +23,8 @@ Label.propTypes = {
   name: string,
   label: string,
   required: bool,
-  withoutMarker: bool
+  withoutMarker: bool,
+  disabled: bool
 };
 
 Label.defaultProps = {
@@ -24,7 +32,8 @@ Label.defaultProps = {
   name: '',
   label: '',
   required: false,
-  withoutMarker: false
+  withoutMarker: false,
+  disabled: false
 };
 
 export default Label;
@@ -34,5 +43,6 @@ const Wrapper = styled.label`
   margin-bottom: 0.2rem;
   padding: 0.1rem 0;
   font-weight: 600;
-  color: var(--label-primary-color);
+  color: ${({ disabled }) =>
+    disabled ? 'var(--label-disabled)' : 'var(--label-primary-color)'};
 `;

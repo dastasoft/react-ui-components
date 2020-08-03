@@ -36,11 +36,13 @@ const Select = ({
 
   const styles = {
     ...customStyles,
-    menu: provided => {
+    menu: (provided, state) => {
+      let borderColor = 'var(--select-primary-color)';
+      if (errorMessage) borderColor = 'var(--select-error)';
+      if (state.isDisabled) borderColor = 'var(--select-disabled)';
+
       let defaults = {
-        borderColor: `${
-          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-        }`,
+        borderColor,
         outline: 'none'
       };
 
@@ -51,11 +53,13 @@ const Select = ({
         ...defaults
       };
     },
-    control: provided => {
+    control: (provided, state) => {
+      let borderColor = 'var(--select-primary-color)';
+      if (errorMessage) borderColor = 'var(--select-error)';
+      if (state.isDisabled) borderColor = 'var(--select-disabled)';
+
       let defaults = {
-        borderColor: `${
-          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-        }`,
+        borderColor,
         outline: 'none'
       };
 
@@ -67,11 +71,13 @@ const Select = ({
         ...defaults
       };
     },
-    placeholder: provided => {
+    placeholder: (provided, state) => {
+      let color = 'var(--select-primary-color)';
+      if (errorMessage) color = 'var(--select-error)';
+      if (state.isDisabled) color = 'var(--select-disabled)';
+
       let defaults = {
-        color: `${
-          errorMessage ? 'var(--select-error)' : 'var(--select-primary-color)'
-        }`
+        color
       };
 
       if (customStyles.placeholder)
@@ -105,6 +111,7 @@ const Select = ({
     <Wrapper className={className}>
       {label && (
         <Label
+          disabled={disabled}
           label={label}
           name={name}
           required={required}

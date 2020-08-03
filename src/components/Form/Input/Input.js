@@ -52,6 +52,7 @@ const Input = ({
     <Wrapper className={className}>
       {label && (
         <Label
+          disabled={disabled}
           label={label}
           name={name}
           required={required}
@@ -114,12 +115,17 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
-  background-color: var(--input-bg-color);
-  color: var(--input-primary-color);
+  background-color: ${({ disabled }) =>
+    disabled ? 'var(--input-bg-disabled)' : 'var(--input-bg-color)'};
+  color: ${({ disabled }) =>
+    disabled ? 'var(--input-disabled)' : 'var(--input-primary-color)'};
   padding: 0.5rem;
   border: 1px solid
-    ${({ error }) =>
-      error ? 'var(--input-error)' : 'var(--input-primary-color)'};
+    ${({ error, disabled }) => {
+      if (disabled) return 'var(--input-border-disabled)';
+      if (error) return 'var(--input-error)';
+      return 'var(--input-primary-color)';
+    }};
   width: inherit;
 
   :focus {
@@ -127,6 +133,7 @@ const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: var(--input-placeholder);
+    color: ${({ disabled }) =>
+      disabled ? 'var(--input-disabled)' : 'var(--input-placeholder)'};
   }
 `;
