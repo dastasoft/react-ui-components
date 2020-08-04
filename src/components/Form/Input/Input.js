@@ -19,11 +19,13 @@ const Input = ({
   rules,
   onChange,
   onBlur,
-  isDate
+  isDate,
+  isExpire
 }) => {
   const { register, errors, setValue } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
+  const dateMaxLength = isExpire ? 5 : 11;
 
   const onKeyDown = event => {
     const inputValue = event.target.value;
@@ -39,7 +41,11 @@ const Input = ({
 
   const onDateChangeHandler = event => {
     const { value } = event.target;
-    if (!value || isNaN(value.replace(/\//g, '')) || value.length === 11) {
+    if (
+      !value ||
+      isNaN(value.replace(/\//g, '')) ||
+      value.length === dateMaxLength
+    ) {
       setValue(name, value.slice(0, -1));
       return;
     }
@@ -69,8 +75,8 @@ const Input = ({
         placeholder={placeholder}
         type={inputType}
         onBlur={onBlur}
-        onChange={isDate ? onDateChangeHandler : onChange}
-        onKeyDown={isDate ? onKeyDown : () => {}}
+        onChange={isDate || isExpire ? onDateChangeHandler : onChange}
+        onKeyDown={isDate || isExpire ? onKeyDown : () => {}}
       />
       <ValidationMessage message={errorMessage} />
     </Wrapper>
@@ -89,7 +95,8 @@ Input.propTypes = {
   rules: object,
   onChange: func,
   onBlur: func,
-  isDate: bool
+  isDate: bool,
+  isExpire: bool
 };
 
 Input.defaultProps = {
@@ -103,7 +110,8 @@ Input.defaultProps = {
   rules: {},
   onChange: () => {},
   onBlur: () => {},
-  isDate: false
+  isDate: false,
+  isExpire: false
 };
 
 export default Input;
