@@ -18,9 +18,9 @@ const SimpleButton = forwardRef(
     },
     ref
   ) => {
-    const onClickHandler = () => {
+    const onClickHandler = event => {
       if (disabled) return;
-      onClick();
+      onClick(event);
     };
 
     return (

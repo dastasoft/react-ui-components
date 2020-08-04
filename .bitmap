@@ -225,7 +225,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "dastag.ui-components/simple-button@0.0.1": {
+    "dastag.ui-components/simple-button@0.0.2": {
         "files": [
             {
                 "relativePath": "src/components/SimpleButton.js",
