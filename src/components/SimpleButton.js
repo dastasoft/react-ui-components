@@ -11,6 +11,7 @@ const SimpleButton = forwardRef(
       onClick,
       width,
       height,
+      name,
       outlined,
       borderRadius,
       labelSize,
@@ -30,6 +31,7 @@ const SimpleButton = forwardRef(
         className={className}
         disabled={disabled}
         height={height}
+        name={name}
         outlined={outlined}
         type={type}
         width={width}
@@ -50,6 +52,7 @@ SimpleButton.propTypes = {
   onClick: func,
   width: string,
   height: string,
+  name: string,
   outlined: bool,
   borderRadius: string,
   labelSize: string,
@@ -63,6 +66,7 @@ SimpleButton.defaultProps = {
   onClick: () => {},
   width: '271px',
   height: '44px',
+  name: '',
   outlined: false,
   borderRadius: '0rem',
   labelSize: '17px',

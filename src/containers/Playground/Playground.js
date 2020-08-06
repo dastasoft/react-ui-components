@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import Select from '../../components/Form/Select';
+import Checkbox from '../../components/Form/Checkbox';
 import Button from '../../components/Button';
 
 const Playground = () => {
@@ -16,27 +16,7 @@ const Playground = () => {
       <Holder>
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Select
-              placeholder="test"
-              label="test"
-              name="test"
-              options={[{ label: 'Spain', value: 'SP' }]}
-              rules={{ required: 'oso' }}
-              customStyles={{
-                control: provided => ({
-                  ...provided,
-                  fontSize: '19px',
-                  fotnWeight: '400',
-                  textTransform: 'uppercase'
-                }),
-                singleValue: provided => ({
-                  ...provided,
-                  fontSize: '19px',
-                  fotnWeight: '400',
-                  textTransform: 'uppercase'
-                })
-              }}
-            />
+            <Checkbox name="test" />
             <Button text="Submit" />
           </Form>
         </FormProvider>

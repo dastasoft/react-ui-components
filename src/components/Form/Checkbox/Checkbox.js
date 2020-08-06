@@ -1,6 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext } from 'react-hook-form';
 import { string, bool, object, func, node } from 'prop-types';
@@ -24,8 +24,8 @@ const Checkbox = ({
   checkColor,
   size
 }) => {
-  const [checked, setChecked] = useState(false);
   const { register, errors, setValue, getValues } = useFormContext();
+  const [checked, setChecked] = useState(false);
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
 
@@ -51,6 +51,10 @@ const Checkbox = ({
       )}
     </SVG>
   );
+
+  useEffect(() => {
+    setChecked(getValues(name));
+  }, []);
 
   return (
     <Wrapper className={className}>
