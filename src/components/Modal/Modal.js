@@ -24,20 +24,22 @@ const Modal = ({
   minHeight,
   shadow,
   rounded,
-  borderColor
+  borderColor,
+  borderRadius
 }) => (
   <Wrapper className={className} show={show}>
     <Backdrop show={show} onClick={onClick} />
     <ModalWindow
-      className={show ? 'open' : ''}
       bgColor={bgColor}
-      minWidth={minWidth}
-      width={width}
-      minHeight={minHeight}
-      height={height}
       borderColor={borderColor}
+      borderRadius={borderRadius}
+      className={show ? 'open' : ''}
+      height={height}
+      minHeight={minHeight}
+      minWidth={minWidth}
       rounded={rounded}
       shadow={shadow}
+      width={width}
     >
       <Header withHeader={withHeader}>
         <span className={titleStyles}>{title}</span>{' '}
@@ -67,7 +69,8 @@ Modal.propTypes = {
   minHeight: string,
   shadow: bool,
   rounded: bool,
-  borderColor: string
+  borderColor: string,
+  borderRadius: string
 };
 
 Modal.defaultProps = {
@@ -87,7 +90,8 @@ Modal.defaultProps = {
   minHeight: 'none',
   shadow: false,
   rounded: false,
-  borderColor: '#ccc'
+  borderColor: '#ccc',
+  borderRadius: '1rem'
 };
 
 export default React.memo(Modal);
@@ -112,7 +116,8 @@ const ModalWindow = styled.div`
   height: ${({ height }) => height};
   max-height: 90vh;
   border: 1px solid ${({ borderColor }) => borderColor};
-  border-radius: ${({ rounded }) => (rounded ? '1rem' : '')};
+  border-radius: ${({ rounded, borderRadius }) =>
+    rounded ? borderRadius : ''};
   box-shadow: ${({ shadow }) =>
     shadow ? '0 0 60px 10px rgba(0, 0, 0, 0.9)' : ''};
   padding: 16px;
