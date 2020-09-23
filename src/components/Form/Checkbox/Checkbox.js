@@ -24,7 +24,7 @@ const Checkbox = ({
   checkColor,
   size
 }) => {
-  const { register, errors, setValue, getValues } = useFormContext();
+  const { register, errors, setValue, getValues, watch } = useFormContext();
   const [checked, setChecked] = useState(false);
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
@@ -54,7 +54,7 @@ const Checkbox = ({
 
   useEffect(() => {
     setChecked(getValues(name));
-  }, []);
+  }, [watch(name)]);
 
   return (
     <Wrapper className={className}>

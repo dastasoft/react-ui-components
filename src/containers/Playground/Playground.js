@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -9,6 +9,10 @@ import Button from '../../components/Button';
 const Playground = () => {
   const methods = useForm({ mode: 'all' });
   const onSubmit = values => console.log(values);
+
+  useEffect(() => {
+    setTimeout(() => methods.setValue('test', true), 2000);
+  }, []);
 
   return (
     <Wrapper>
