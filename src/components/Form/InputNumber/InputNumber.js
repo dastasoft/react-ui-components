@@ -45,7 +45,8 @@ const InputNumber = ({
 
   const onIncrement = () => {
     const currentValue = getValues(name);
-    if (currentValue < max)
+    if (!currentValue) setValue(name, 1, fieldActions);
+    else if (currentValue < max)
       setValue(name, parseInt(currentValue, 10) + 1, fieldActions);
   };
 

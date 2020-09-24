@@ -1,28 +1,29 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import Checkbox from '../../components/Form/Checkbox';
-import Button from '../../components/Button';
+import Select from '../../components/Form/Select/Select';
+import InputNumber from '../../components/Form/InputNumber';
 
 const Playground = () => {
-  const methods = useForm({ mode: 'all' });
+  const methods = useForm({
+    mode: 'all',
+    defaultValues: {
+      test: ''
+    }
+  });
   const onSubmit = values => console.log(values);
-
-  useEffect(() => {
-    setTimeout(() => methods.setValue('test', true), 2000);
-  }, []);
 
   return (
     <Wrapper>
       <ComponentTitle>Form</ComponentTitle>
       <Holder>
         <FormProvider {...methods}>
-          <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Checkbox name="test" />
-            <Button text="Submit" />
-          </Form>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Select name="test2" options={[{ value: 'oso', label: 'oso' }]} />
+            <InputNumber name="test" placeholder="0" />
+          </form>
         </FormProvider>
       </Holder>
       <div style={{ display: 'flex' }}>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useFormContext, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
@@ -30,7 +30,6 @@ const Select = ({
   noOptionsMessage
 }) => {
   const { errors, control } = useFormContext();
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const errorMessage = errors[name] ? errors[name].message : '';
   const required = 'required' in rules;
 
@@ -96,9 +95,11 @@ const Select = ({
         {customDropdownIcon || (
           <StyledCaret>
             <Caret
-              down={!menuIsOpen}
+              down={!props.selectProps.menuIsOpen}
               fill={
-                menuIsOpen ? customDropdownColor : 'var(--select-primary-color)'
+                props.selectProps.menuIsOpen
+                  ? customDropdownColor
+                  : 'var(--select-primary-color)'
               }
             />
           </StyledCaret>
@@ -138,8 +139,6 @@ const Select = ({
               onChange(value);
               props.onChange(value);
             }}
-            onMenuClose={() => setMenuIsOpen(false)}
-            onMenuOpen={() => setMenuIsOpen(true)}
           />
         )}
         rules={rules}
