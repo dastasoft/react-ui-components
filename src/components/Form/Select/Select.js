@@ -27,7 +27,7 @@ const Select = ({
   customDropdownColor,
   customTheme,
   onChange,
-  noOptionsMessage
+  noOptionsMessage,
 }) => {
   const { errors, control } = useFormContext();
   const errorMessage = errors[name] ? errors[name].message : '';
@@ -42,14 +42,14 @@ const Select = ({
 
       let defaults = {
         borderColor,
-        outline: 'none'
+        outline: 'none',
       };
 
       if (customStyles.menu) defaults = { ...defaults, ...customStyles.menu() };
 
       return {
         ...provided,
-        ...defaults
+        ...defaults,
       };
     },
     control: (provided, state) => {
@@ -59,7 +59,7 @@ const Select = ({
 
       let defaults = {
         borderColor,
-        outline: 'none'
+        outline: 'none',
       };
 
       if (customStyles.control)
@@ -67,7 +67,7 @@ const Select = ({
 
       return {
         ...provided,
-        ...defaults
+        ...defaults,
       };
     },
     placeholder: (provided, state) => {
@@ -76,7 +76,7 @@ const Select = ({
       if (state.isDisabled) color = 'var(--select-disabled)';
 
       let defaults = {
-        color
+        color,
       };
 
       if (customStyles.placeholder)
@@ -84,12 +84,12 @@ const Select = ({
 
       return {
         ...provided,
-        ...defaults
+        ...defaults,
       };
-    }
+    },
   };
 
-  const DropdownIndicator = props => {
+  const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
         {customDropdownIcon || (
@@ -123,10 +123,10 @@ const Select = ({
         control={control}
         id={name}
         name={name}
-        render={props => (
+        render={(props) => (
           <ReactSelect
             className={selectClassName}
-            components={{ DropdownIndicator, IndicatorSeparator: null }}
+            components={{ IndicatorSeparator: null }}
             defaultValue={defaultValue}
             isDisabled={disabled}
             noOptionsMessage={() => noOptionsMessage}
@@ -135,7 +135,7 @@ const Select = ({
             styles={styles}
             theme={customTheme}
             value={props.value}
-            onChange={value => {
+            onChange={(value) => {
               onChange(value);
               props.onChange(value);
             }}
@@ -164,7 +164,7 @@ Select.propTypes = {
   customDropdownIcon: node,
   customDropdownColor: string,
   onChange: func,
-  noOptionsMessage: string
+  noOptionsMessage: string,
 };
 
 Select.defaultProps = {
@@ -182,7 +182,7 @@ Select.defaultProps = {
   customDropdownIcon: null,
   customDropdownColor: 'var(--select-primary-color)',
   onChange: () => {},
-  noOptionsMessage: ''
+  noOptionsMessage: '',
 };
 
 export default Select;
