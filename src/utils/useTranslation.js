@@ -1,10 +1,19 @@
 import { useState } from 'react';
 
-const useTranlation = (appLanguage = 'en', appDictionary = {}) => {
+const useTranlation = (
+  appLanguage = 'en',
+  appDictionary = {},
+  replaceStartSign = '{{',
+  replaceEndSign = '}}'
+) => {
   const [dictionary] = useState(appDictionary);
   const [language, setLanguage] = useState(appLanguage);
 
-  const changeLanguage = newLanguage => setLanguage(newLanguage);
+  const onChangeLanguage = (callback = () => {}) => callback();
+  const changeLanguage = newLanguage => {
+    setLanguage(newLanguage);
+    onChangeLanguage();
+  };
 
   const getTranslation = (text = '', replacements = []) => {
     const register = dictionary[text];
@@ -15,13 +24,13 @@ const useTranlation = (appLanguage = 'en', appDictionary = {}) => {
       if (Array.isArray(replacements)) {
         replacements.forEach(replacement => {
           translation = translation.replace(
-            `%${replacement.label}%`,
+            `${replaceStartSign}${replacement.label}${replaceEndSign}`,
             replacement.value
           );
         });
       } else if (replacements.label) {
         translation = translation.replace(
-          `%${replacements.label}%`,
+          `${replaceStartSign}${replacements.label}${replaceEndSign}`,
           replacements.value
         );
       }
@@ -32,6 +41,7 @@ const useTranlation = (appLanguage = 'en', appDictionary = {}) => {
 
   return {
     changeLanguage,
+    onChangeLanguage,
     getTranslation
   };
 };

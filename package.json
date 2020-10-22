@@ -12,7 +12,7 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/react@1.0.20"
+      "compiler": "bit.envs/compilers/react@1.0.21"
     },
     "componentsDefaultDirectory": "src/components/{name}",
     "packageManager": "yarn",
