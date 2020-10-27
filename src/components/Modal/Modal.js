@@ -20,8 +20,10 @@ const Modal = ({
   bgColor,
   width,
   minWidth,
+  maxWidth,
   height,
   minHeight,
+  maxHeight,
   shadow,
   rounded,
   borderColor,
@@ -35,6 +37,8 @@ const Modal = ({
       borderRadius={borderRadius}
       className={show ? 'open' : ''}
       height={height}
+      maxHeight={maxHeight}
+      maxWidth={maxWidth}
       minHeight={minHeight}
       minWidth={minWidth}
       rounded={rounded}
@@ -63,8 +67,10 @@ Modal.propTypes = {
   closeColor: string,
   withHeader: bool,
   bgColor: string,
+  maxWidth: string,
   width: string,
   minWidth: string,
+  maxHeight: string,
   height: string,
   minHeight: string,
   shadow: bool,
@@ -84,10 +90,12 @@ Modal.defaultProps = {
   closeColor: '#000000',
   withHeader: false,
   bgColor: 'white',
+  maxWidth: 'none',
   width: '',
   minWidth: 'none',
   height: '',
   minHeight: 'none',
+  maxHeight: 'none',
   shadow: false,
   rounded: false,
   borderColor: '#ccc',
@@ -109,9 +117,11 @@ const ModalWindow = styled.div`
   opacity: 0;
   z-index: 500;
   background-color: ${({ bgColor }) => bgColor};
+  max-width: ${({ maxWidth }) => maxWidth};
   min-width: ${({ minWidth }) => minWidth};
   width: ${({ width }) => width};
   max-width: 90vw;
+  max-height: ${({ maxHeight }) => maxHeight};
   min-height: ${({ minHeight }) => minHeight};
   height: ${({ height }) => height};
   max-height: 90vh;
